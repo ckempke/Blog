@@ -7,18 +7,16 @@ nav:
 # toc adds sub-page "permalinks" to headers (address#header)
 # pymdownx.arithmatex adds mathjax/katex support for equations and such
 markdown_extensions:
-    toc:
+  - toc:
         permalink: true
-    pymdownx.arithmatex:
-        generic: true
+  - footnotes
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-  - footnotes
-  - pymdownx.arithmatex:
-      generic: true
      
 plugins:
     - search
