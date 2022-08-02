@@ -11,10 +11,17 @@ markdown_extensions:
         permalink: true
     pymdownx.arithmatex:
         generic: true
-      
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - footnotes
+  - pymdownx.arithmatex:
+      generic: true
+     
 plugins:
     - search
-    - mermaid2
     - blogging:
         dirs:
             - blog
@@ -26,7 +33,7 @@ plugins:
            tags: {}
         time_format: '%Y-%m-%d %H:%M:%S' # The format used to display the time
         meta_time_format: '%Y-%m-%d %H:%M:%S' # The format used to parse the time from meta
-         
+
 
 # All of these are needed for mathjax (equations and symbols) support
 extra_javascript:
