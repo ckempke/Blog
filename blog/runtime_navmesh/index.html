@@ -1,0 +1,769 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ckempke.github.io/Blog/blog/runtime_navmesh/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Asynchronous Runtime Navmesh Generation in Unity - Christopher Kempke's Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#background" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Christopher Kempke&#39;s Blog" class="md-header__button md-logo" aria-label="Christopher Kempke's Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Christopher Kempke's Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Asynchronous Runtime Navmesh Generation in Unity
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Christopher Kempke&#39;s Blog" class="md-nav__button md-logo" aria-label="Christopher Kempke's Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Christopher Kempke's Blog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+    <nav class="md-nav" aria-label="Background">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#navmesh" class="md-nav__link">
+    NavMesh
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#navmeshagent" class="md-nav__link">
+    NavMeshAgent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#navagent-active-agent-placed-on-a-navmesh-errors" class="md-nav__link">
+    NavAgent "active agent ... placed on a NavMesh" Errors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-we-we-talking-about-again" class="md-nav__link">
+    What we we talking about, again?
+  </a>
+  
+    <nav class="md-nav" aria-label="What we we talking about, again?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#components-for-runtime-navmesh-building" class="md-nav__link">
+    Components for Runtime NavMesh Building.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-navmeshbuilder" class="md-nav__link">
+    Using NavMeshBuilder
+  </a>
+  
+    <nav class="md-nav" aria-label="Using NavMeshBuilder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collecting-sources" class="md-nav__link">
+    Collecting Sources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-the-build-settings-for-each-agent-type" class="md-nav__link">
+    Get the Build Settings for each Agent Type
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-the-navmeshdata" class="md-nav__link">
+    Build the NavMeshData
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-the-navmesh-to-the-scene" class="md-nav__link">
+    Add the NavMesh to the Scene
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wait-why-are-you-still-here" class="md-nav__link">
+    Wait, why are you still here?
+  </a>
+  
+    <nav class="md-nav" aria-label="Wait, why are you still here?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rebuild-for-asynchronicity" class="md-nav__link">
+    Rebuild for Asynchronicity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#so-does-it-work" class="md-nav__link">
+    So does it work?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<p>Buckle in, boys and girls.  This one's going to be a ride.</p>
+<p>I've recently started trying to add monsters to the world I'm creating over in my <a href="https://ckempke.github.io/UnityTerrainGeneration">Unity Procedural Terrain</a> system.   I'd like to use the <strong>NavMesh</strong> system for enemy AI, but since my terrains aren't created in the Unity Editor, but rather randomly at runtime, I need to be able to create the <strong>NavMeshes</strong> for my monsters at runtime.</p>
+<p>And thus began the rabbit hole.   It became quickly obvious that <em>it could be done,</em> but equally obvious that there wasn't really a good known solution out there, particularly one that was performant enough to use in a runtime environment where terrains were being created and destroyed at a reasonably fast cadence as the player moves around a large open world.</p>
+<p>As every Unity developer knows, the Unity documentation is sort of like the Evil Stepmother of fairy tales: keeping up an appearance of caring about you while secretly undermining any chance you've got for success, and possibly actually poisoning you.</p>
+<blockquote>
+<p>[Author's Note] If anyone at Unity is reading this, <em>please</em> consider hiring me to come in and try and clean up some of that documentation, particularly the scripting side.   Some simple rules and standards could make it infinitely more useful for actual developers.</p>
+</blockquote>
+<p>So I've dug into this, and it turns out that it's not actually as horrifying as it initially seems, although there's a few caveats.    Let's see if we can clear it up a bit.</p>
+<h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h2>
+<p>Unity provides a built-in AI Navigation system for 3D games.   This allows 3D entities to figure out where they can "walk," and provides automatic pathing, obstacle avoidance, patrol points, target tracking, and the like.   It's not going to pass the Turing test any time soon, but for many games it provides a moderately sophisticated level of "enemy" AI for relatively little effort.</p>
+<p>The two major components of this system are the <strong>NavMesh</strong> and the <strong>NavMeshAgent</strong>.</p>
+<h3 id="navmesh">NavMesh<a class="headerlink" href="#navmesh" title="Permanent link">&para;</a></h3>
+<p><strong>NavMesh</strong> is a property of the <strong>Scene</strong>.   You can think of it as a sort of invisible carpet that covers the scene in places where an entity of a given size can walk.   That is, it'll be all over the floor except right next to walls or under doors and arches that the entity is too large to pass through, or on slopes too steep for that entity to walk up.</p>
+<p>You can visualize a <strong>NavMesh</strong> in a scene by:</p>
+<ul>
+<li>Opening the Navigation Inspector (Window-&gt;AI-&gt;Navigation).  You need to have the inspector active in order to see <strong>NavMeshes</strong>.</li>
+<li>Go to the Scene View</li>
+<li>Turn on Gizmos (either all of them, or the specific ones for Navigation AI).</li>
+<li>Move your viewpoint close enough to the mesh (navmeshes clip out after a few dozen units).</li>
+</ul>
+<p>If you've done all that—and there's a <strong>NavMesh</strong> created for the <strong>Scene</strong> at all—you should see a sort of blue layer across your walkable areas.</p>
+<p><img alt="Image of a Navmesh on Steep Terrain" src="../blogmedia/navmesh_basic.jpg" /></p>
+<p>Note that the <strong>NavMesh</strong> is pretty smart:  it doesn't allow you to "walk" on the cliff faces or steeper areas, and avoids the larger rocks (though not the trees in this case).   The image above actually shows <em>two</em> overlapping <strong>NavMeshes</strong>:  one for fairly large entities (giants and such), and one for human-sized ones.   You can see the difference particularly along the straight cliff edge, where smaller entities can approach much closer than large ones.    Note that the <strong>NavMesh</strong> indicates where the <em>center</em> of the entity can travel, which is why it doesn't go right to the edges.  (That screen shot is from a significant distance from the player in the center.)</p>
+<p>The <strong>NavMesh</strong> typically is built for "walkable" areas, although you have a great deal of flexibility in its creation.   For example, you can mark certain areas as "walkable, but harder," like mud, sand, or shallow water.   The AI system will assign these areas higher cost, allowing the navigating to be "smart" about whether to walk through such an area or go around.    It's also possible to add meshes with different "up" orientations, such as for spiders that can walk on walls or ceilings (linking them with "off mesh links").</p>
+<p>You can't see it here because the distances are too large, but the <strong>NavMesh</strong> will also intelligently create "jump" points, where an entity cannot walk because of steepness or interrupted ground, but could safely jump up, down, or over.</p>
+<p>There are some other capabilities present, as well: the ability for meshes to connect to other meshes via physical joints or outright teleportation, and the ability to make anti-meshes (non-walkable areas) and the like.  We won't be using those today.</p>
+<p>Finally, we need to note the difference between a <strong>NavMesh</strong> and a HeightMesh.   <strong>NavMeshes</strong> are approximations to the surfaces they describe; in particular "stairs" and other steps tend to get smoothed out into ramps.   This doesn't matter for the purposed of navigation, but it can make your entities sort of "float" above the ground if they're placed directly on the mesh.    HeightMeshes are a similar process, but they're more expensive to build and follow the ground more or less precisely (each stair will be flat, for example).     The system I'm describing here makes only NavMeshes, so you may need to tweak monster positions a little bit in order to make them stick to the ground.</p>
+<p><em>Ultimately NavMeshes describe connectivity</em>:  Our entity can move from any blue area to any connected blue area, jump from one blue area to another across paired jump zones, and not move at all through non-blue areas.</p>
+<p>One final tip here:   You can turn on NavMesh gizmos in the Game view as well as the Scene view.   This is horrible for performance; your frame rates will drop precipitously.   But it can be useful to occasionally check the meshes from the "point of view" of the player.    It's also generally easier to see the height offsets between the actual ground and the approximating NavMesh in Game view.</p>
+<h3 id="navmeshagent">NavMeshAgent<a class="headerlink" href="#navmeshagent" title="Permanent link">&para;</a></h3>
+<p>The other half of the equation is the <strong>NavMeshAgent</strong>.   This is a component that's placed on the gameobject representing the moving 3D entity.   It describes the entity's size and movement characteristics, things like:</p>
+<ul>
+<li>Height</li>
+<li>Width (technically "radius" of an implicit capsule collider)</li>
+<li>Turn speed in degrees/second</li>
+<li>How high the agent can step</li>
+<li>How steep a slope the agent can walk up</li>
+<li>Speed, acceleration, and stopping distance</li>
+</ul>
+<p>The <strong>NavMeshAgent</strong> also includes an "Agent Type ID", which is defined in the <em>Navigation</em> window's <em>Agents</em> tab.  This duplicates several of the other properties (height, radius, step size, slope), and I'm not at all sure why you have to specify both, since if they don't match, the <strong>NavMeshAgent</strong> won't work.   We'll encounter the Agent Type under another name: "Build Settings" later in the process.    </p>
+<p><em>We will need to generate one NavMesh for every Agent Type that will walk on it.</em>  Since it's expensive to make these (in both memory and computation time), you'll likely want to bucket all of your entities into 2-3 different agent types (or just one, if everybody's human), even if that means some of the sizes won't match exactly.  (This doesn't apply as much if you're baking in the editor where time doesn't matter, but they still take up a fair amount of memory.)</p>
+<p>From scripts, we can access the agent in the usual way we access any component:</p>
+<div class="highlight"><pre><span></span><code><span class="n">NavMeshAgent</span><span class="w"> </span><span class="n">_navMeshAgent</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">NavMeshAgent</span><span class="p">&gt;();</span><span class="w"></span>
+</code></pre></div>
+<p>Once you've got the agent, you can set a destination with <code>SetDestination(&lt;Vector3&gt;)</code> and override the speed, acceleration, turn rate, etc. if you like (if you don't, they'll use the ones defined in the agent itself).  The Vector3 passed to "destination" ignores the Y value unless the NavMesh overlaps itself in 3D.</p>
+<p>We actually turn it on by telling the agent it should no longer be stopped:</p>
+<div class="highlight"><pre><span></span><code><span class="n">_navMeshAgent</span><span class="p">.</span><span class="n">isStopped</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span><span class="w">    </span>
+</code></pre></div>
+<p>(You also need the usual stuff like making sure the component is enabled and active.)</p>
+<p>At this point, one of two things will happen:  The agent will start to move the gameObject toward the destination (it controls facing and movement, things like animation are up to you), or you'll start getting tons of error messages about "<Various Functions> can only be called on an active agent that has been placed on a NavMesh."</p>
+<p>Let's ignore the errors for a moment.   Assuming your agent is moving your gameObject, you can then use the <code>remainingDistance</code> property on the NavMeshAgent to figure out how far the agent is from its destination (say, to give it another waypoint on a patrol route.).   There are two caveats with <code>remainingDistance</code>:</p>
+<p>1) It will return 0 when the agent can go no farther.   This doesn't necessarily mean that it's at the destination you originally specified, just that it's as close as the NavMesh allows to that point (which could be quite far away, if you specified a someplace way off the mesh).
+2) If the agent can't move in a straight line to the destination, it tends to return <code>Infinity</code> while it traverses a path, up until the last "leg."  Once it's just on a straight-line route to it's destination, it'll start giving real numbers.</p>
+<p>Both of these mean that you'll not want to rely on <code>remainingDistance</code> for things like "time to destination" calculations, because they'll be as random as a Windows download progress bar.   Generally you care if it's very near zero or if it isn't.   (It actually seems OK to test for exactly zero, but I've got 45 years of experience telling me to be skittish about exact equality tests on floating point numbers.)</p>
+<p>You don't need to wait for it to reach a destination before assigning a new one.  For example, if it's chasing a player, you can give it the player's position as the destination every few frames.</p>
+<h3 id="navagent-active-agent-placed-on-a-navmesh-errors">NavAgent "active agent ... placed on a NavMesh" Errors<a class="headerlink" href="#navagent-active-agent-placed-on-a-navmesh-errors" title="Permanent link">&para;</a></h3>
+<p>OK, back to those errors.  In what's probably the biggest understatement in this post:  NavAgents are very picky about their placement on a mesh.</p>
+<p>Very picky.</p>
+<p>Unbelievably picky.</p>
+<p>As with many of these sorts of things, a sort of mythology develops, as devs find their superstitious practices that "fix" the problem:  The position needs to be exactly on the mesh.  The feet of your model need to be exactly on the mesh.    The model needs a capsule collider of exactly the mesh's agent size.   The agent needs to be disabled and then enabled again.   The "Lord of the Rings" needs to be playing on the TV while you code.</p>
+<p>The capsule collider thing may be true.  Some of the others might work, too, but especially if we're going to be moving these things at runtime on <strong>NavMeshes</strong> that come and go, we need to have a more reliable way of  insuring it.</p>
+<p>There first thing to check is <code>_navMeshAgent.isActiveAndEnabled</code>.  If that returns false, either the gameObject has been set to inactive or the <strong>NavMeshAgent</strong> component on it is disabled.   These are both pretty standard checks for weird Unity behaviors.</p>
+<p>Next up, we can actually test if the agent is "really" on a mesh by asking it.   <code>_navMeshAgent.isOnNavMesh</code> returns <em>true</em>, then the agent is properly placed on a <strong>NavMesh</strong> compatible with its agent.   In this case, you should be good to go, and you won't get the "active agent..." errors for that particular game object.</p>
+<p>But what if <code>isOnNavMesh</code> returns <em>false</em>?</p>
+<p>First off, verify that the Agent Type selected for the agent is compatible with the NavMesh that you believe it to be on.   If you only create the "humanoid" NavMesh, and you've got a non-humanoid agent, it'll never work.</p>
+<p>Otherwise, we should be able to fix it.</p>
+<p>There's two pieces of "magic sauce" here.   One of them its the <code>NavMesh.SamplePosition</code> function.  Note that this is a class ("static" ) function on NavMesh.   All of NavMesh's user-accessible functions are static; which means—among other things—that our options for moving it off-thread will be limited, later.</p>
+<p><code>SamplePosition</code>() works a lot like <code>Physics.Raycast()</code>.  It takes a starting position, tries to find the nearest NavMesh point from it, and returns that value if it works.</p>
+<p>So:</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NavMesh</span><span class="p">.</span><span class="n">SamplePosition</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">NavMeshHit</span><span class="w"> </span><span class="n">hit</span><span class="p">,</span><span class="w"> </span><span class="m">8f</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"></span>
+<span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// &quot;hit.position&quot; now contains a valid position on the mesh</span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w"> </span><span class="k">else</span><span class="w"></span>
+<span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// We&#39;re not close enough to a valid mesh position, do something else</span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>The arguments to <code>SamplePosition</code> are</p>
+<ul>
+<li>The "test" position, probably the location of your gameObject itself.</li>
+<li>An <em>out</em> parameter of type NavMeshHit to hold the valid point (if any)</li>
+<li>The greatest distance to look.   The manual suggests that this should be limited to twice the height  of the agent or else the test starts getting expensive, so "8f" may well not be the right value for you.  That said, I suspect that "twice the height" is a typo, and they mean "twice the radius," since I don't understand how height would have anything to do with it.</li>
+<li>An "area mask" for what part of the NavMesh you want to look at.   "1" here is the area mask for "Walkable", which is often what you want.  Alternatively, "0xFFFF" (or better, the constant <code>NavMesh.AllAreas</code> ) will give you an area mask with all bits set, which will find allow you to find valid jump points, high-cost walking areas, etc.   If your NavMesh has a complex mix of areas, you can be as specific as you want.   Look up the area number in the Navigation window, and left-shift "1" that many times to set a bit in the mask.  (For example, if you want area "3", you'd use <code>1&lt;&lt;3</code>.  If you want area "3" and area "0", use <code>1&lt;&lt;3 | 1&lt;&lt;0</code>, and so on.   You may have encountered this before with layer masks, which work the same way.)</li>
+</ul>
+<p>If <code>SamplePosition</code> returns false, you're out of luck.  If you are placing your "monsters" randomly, this one's likely in a position that's not walkable or reachable, outside the NavMesh area, or there's no current NavMesh at all.   You'll need to determine what to do about it.  If this is an initial random placement, try placing somewhere else.   There's an example in the <a href="https://docs.unity3d.com/ScriptReference/AI.NavMesh.SamplePosition.html">documentation for SamplePosition</a> that shows how to use it to find a random point on a mesh, although it's a little, uh, "hit or miss," if you'll excuse the pun.</p>
+<p>But let's say that SamplePosition has returned <em>true</em>, and now we've got a shiny valid position in <code>hit.position</code>.   We can just set our <code>transform.position = hit.position</code> and we're off, right?  Right?</p>
+<p>Of course not.   Not always, anyway.   It seems to work about half the time.</p>
+<p>To actually move there, use the <code>NavMeshAgent.Warp()</code> function.  This will move the agent's object to the specified position and then apparently do some magic to glue it to the NavMesh.   It returns <em>true</em> if successful, which should be basically always if you're feeding it a position from <code>SamplePosition</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NavMesh</span><span class="p">.</span><span class="n">SamplePosition</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">NavMeshHit</span><span class="w"> </span><span class="n">hit</span><span class="p">,</span><span class="w"> </span><span class="m">8f</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"></span>
+<span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// &quot;hit.position&quot; now contains a valid position on the mesh</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navMeshAgent</span><span class="p">.</span><span class="n">Warp</span><span class="p">(</span><span class="n">hit</span><span class="p">.</span><span class="n">position</span><span class="p">))</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// We&#39;re good, and the agent should work now.</span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Something weird happened, probably the NavMesh or NavMeshAgent became invalid</span>
+<span class="w">        </span><span class="c1">// somehow.   We have to handle it, of course, but it&#39;s going to</span>
+<span class="w">        </span><span class="c1">// be a rare case, so maybe just destroying the object is good enough?</span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w"> </span><span class="k">else</span><span class="w"></span>
+<span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// We&#39;re not close enough to a valid mesh position, do something else</span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h2 id="what-we-we-talking-about-again">What we we talking about, again?<a class="headerlink" href="#what-we-we-talking-about-again" title="Permanent link">&para;</a></h2>
+<p>Oh yeah.   Runtime NavMesh generation.</p>
+<p>To build a NavMesh at runtime, we need to use a NavMeshBuilder, another class/static class in the AI system.    Well, it's actually TWO classes.  One's in <strong>UnityEngine.AI</strong>, the other one's in <strong>UnityEditor.AI</strong>.   But they're documented on the same page, with little annotations for which of the two it applies to.  And they have the same name.  And do the same things.  Except when they don't.</p>
+<blockquote>
+<p>Aside:  Have I mentioned that the Unity scripting documentation is a crime against humanity?  If anybody from Unity is reading this...</p>
+</blockquote>
+<p>As with all things runtime, we can only use the functions in UnityEngine.AI; editor functions aren't available to us.   We'll come back to this in a bit.</p>
+<p>If you need to know the answer, you can skip to the end.   But I think it's important to understand how to do it wrong, and use the learnings from that to figure out how to do it right.</p>
+<h3 id="components-for-runtime-navmesh-building">Components for Runtime NavMesh Building.<a class="headerlink" href="#components-for-runtime-navmesh-building" title="Permanent link">&para;</a></h3>
+<p>So to start with, users have been wanting build NavMeshes at runtime for a very long time, probably as long as NavMesh has existed.   At Unity headquarters, great flaming eye perches atop a dark tower, sweeping over the landscape looking for developers to torture.    At some point about 2016, it settled on developers trying to build runtime NavMeshes.</p>
+<p>The result was something called "Components for Runtime NavMesh Building."   You can learn all about it in a <a href="https://learn.unity.com/tutorial/runtime-navmesh-generation?uv=2017.1">Unity Learn Tutorial here</a>.   These were a set of "prerelease" components available from a Github project that were eventually meant to end up in Unity itself.   They worked by adding a component (<strong>NavMeshSurface</strong>) to the gameObjects that are part of the "environment" and then calling a function to go out and find all these, and use them to build a NavMesh.   But the Eye of Unity is easily distracted, and it quickly went off to start a new incompatible render pipeline or something.</p>
+<p>This tutorial makes two claims of note:  that these would eventually become part of Unity itself (they didn't), and that they are fast enough to use at runtime, even every frame, at least on simple stuff.    That second claim is likely true for things like procedural dungeons with relatively simple structures, but it sure doesn't seem to work that fast on Terrains.</p>
+<p>You still see poor lost souls wandering the Internet trying to use these; any reference to <strong>NavMeshSurface</strong> is a red flag.   Back away slowly and don't make eye contact.   I've actually managed to get them working even in Unity 2021.3, but the fact that these components have been abandoned for half a decade now doesn't give us confidence in using them.</p>
+<h1 id="using-navmeshbuilder">Using NavMeshBuilder<a class="headerlink" href="#using-navmeshbuilder" title="Permanent link">&para;</a></h1>
+<p>So let's go back to the "low level" API, and try to build this ourselves.  There are basically four steps that we need to perform:</p>
+<p>1) Collect a list of the surfaces we're interested in some volume of (virtual) space.
+2) Get descriptions of each of the "agent types" we're going to build the NavMeshes for.
+3) Construct a "NavMeshData" object by evaluating each of those agent types against the surfaces
+4) Add (or replace) that NavMeshData to the scene's current NavMesh.</p>
+<p>Let's look at each of them.</p>
+<h3 id="collecting-sources">Collecting Sources<a class="headerlink" href="#collecting-sources" title="Permanent link">&para;</a></h3>
+<p>The first thing we want to do is collect a list of the surfaces, or <em>sources</em> that are available as potential parts of our NavMesh.    This list is independent of Agent Type, so we've only got to do it once for a given volume of space.   This will be done with <code>NavMeshBuilder.CollectSources()</code>, which takes six parameters.</p>
+<p>The first thing we need to do is specify the volume of space that the NavMesh will be built in.   The larger this space, the longer it takes to build the mesh; I'll give you some actual numbers later on.   But however we determine it, we'll need to create a <code>Bounds</code> object with it.  That's basically a cube or box with a center and a radius along each axis.   Here I make one centered on the player.   My world is very 3D, so I use the same radius on all three axis.   If yours is relatively flat, you might want to use a much smaller value for "y".</p>
+<div class="highlight"><pre><span></span><code><span class="n">Bounds</span><span class="w"> </span><span class="n">patchBounds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bounds</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">));</span><span class="w"></span>
+</code></pre></div>
+<p>Next, you may or may not want every object in your scene to potentially be a walkable surface; it depends on your game.   If you want to limit it to just certain objects, collect them into a layer.   I use one called "Terrain".   We're going to need a layer <em>mask</em>, which we get similarly to the area masks we described above:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;Terrain&quot;</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>If you need more layers, "or" them together:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="p">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;FirstLayer&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="p">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;SecondLayer&quot;</span><span class="p">));</span><span class="w"></span>
+</code></pre></div>
+<p>And so on.   You could use 0xFFFF to set all bits, but that's likely to get you some pretty weird layers, and it's fragile in the face of third-party assets that often add layers.   Better to specify them exactly.</p>
+<p>Programmer Note:  You'll often see "+" used instead of "|" to combine masks like this.   That's fine, <em>so long as there are no duplicate values in the mask</em>.  If there are, addition will get you the wrong answer.</p>
+<p>Next up, we decide whether we want to collect render surfaces or collider ones.   Typically, we think of a <strong>NavMesh</strong> as avoiding things we want to not collide with, so usually <code>NavMeshCollectGeometry.PhysicsColliders</code> is the right answer.</p>
+<p>The next two parameters to our collection function are the default area type (0 for "walkable") and a list of <strong>NavMeshBuildMarkup</strong> objects.     These are what college professors often refer to as "left for the interested reader to discover."   They allow you to build meshes with non-uniform surfaces in them (for example, hard ground and soft mud), but we'll just assume it's all uniform, and pass "0" and an empty list for these two.</p>
+<p>Finally, we pass an empty list of <strong>NavMeshBuildSources</strong>, and the function will fill them in for us.</p>
+<p>With these six decisions in hand, we're ready to call <code>NavMeshBuilder.CollectSources</code>, which will do the actual scan of the Scene to find the sources and return them to us:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Get the list of all &quot;sources&quot; around us.  This is basically little gridded subsquares</span>
+<span class="c1">// of our terrains.</span>
+<span class="n">List</span><span class="p">&lt;</span><span class="n">NavMeshBuildSource</span><span class="p">&gt;</span><span class="w"> </span><span class="n">buildSources</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">NavMeshBuildSource</span><span class="p">&gt;();</span><span class="w"></span>
+
+<span class="c1">// Set up a boundary area for the build sources collector to look at;</span>
+<span class="n">Bounds</span><span class="w"> </span><span class="n">patchBounds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bounds</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="n">Monster</span><span class="p">.</span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">Monster</span><span class="p">.</span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">Monster</span><span class="p">.</span><span class="n">navigationMeshRadius</span><span class="p">));</span><span class="w"></span>
+
+<span class="c1">// This actually collects them</span>
+<span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">CollectSources</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="n">patchBounds</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="m">1</span><span class="w"> </span><span class="p">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;Terrain&quot;</span><span class="p">),</span><span class="w"></span>
+<span class="w">            </span><span class="n">NavMeshCollectGeometry</span><span class="p">.</span><span class="n">PhysicsColliders</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="m">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">NavMeshBuildMarkup</span><span class="p">&gt;(),</span><span class="w"></span>
+<span class="w">            </span><span class="n">buildSources</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>There's an alternate form of <code>CollectSources</code> that takes a <strong>GameObject</strong> as the first parameter (instead of the bounds) and builds only from that object and it's children.   Depending on how your game objects are structured in the hierarchy, one of the other will likely be easiest for you.</p>
+<h3 id="get-the-build-settings-for-each-agent-type">Get the Build Settings for each Agent Type<a class="headerlink" href="#get-the-build-settings-for-each-agent-type" title="Permanent link">&para;</a></h3>
+<p>This one's easy:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">GetSettingsCount</span><span class="p">();</span><span class="w"> </span><span class="n">agentIndex</span><span class="p">++)</span><span class="w"></span>
+<span class="w">   </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// Get the settings for each of our agent &quot;sizes&quot; (humanoid, giant humanoid)</span>
+<span class="w">            </span><span class="n">NavMeshBuildSettings</span><span class="w"> </span><span class="n">bSettings</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">GetSettingsByIndex</span><span class="p">(</span><span class="n">agentIndex</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">         </span><span class="p">...</span><span class="w"></span>
+<span class="w">   </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>We can treat the <strong>NavMeshBuildSettings</strong> object as opaque, but if you look into it, you'll see it pretty much just contains all those values we set in the Navigation Window's "Agents" tab.</p>
+<p>But there's a handy function on <strong>NavMeshBuildSettings</strong> objects (a member function, not a class/static function) called <code>ValidationReport</code>.  You use it like this:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#if DEBUG</span><span class="w"></span>
+<span class="c1">// If there are any issues with the agent, print them out as a warning.</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">bSettings</span><span class="p">.</span><span class="n">ValidationReport</span><span class="p">(</span><span class="n">patchBounds</span><span class="p">))</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">   </span><span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">$&quot;BuildSettings Report: {NavMesh.GetSettingsNameFromID(bSettings.agentTypeID)} : {s}&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="cp">#endif</span><span class="w"></span>
+</code></pre></div>
+<p>This will verify that various of the parameters in each Agent Type's build settings are compatible; typically "Step Size" and "Maximum Slope" are the ones most likely to conflict.   These don't necessarily make the <strong>NavMesh</strong> unusable, but you'll get some weird <strong>NavMeshAgent</strong> behaviors if you just ignore the warnings.   The warning will tell you exactly what parameters are incompatible and what values will make them compatible.</p>
+<h3 id="build-the-navmeshdata">Build the NavMeshData<a class="headerlink" href="#build-the-navmeshdata" title="Permanent link">&para;</a></h3>
+<p>Now that we've got all that, we need to use it to build the actual <strong>NavMeshData</strong>.   For that, we call <code>NavMeshBuilder.BuildNavMeshData</code>  <em>for each Agent Type</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">NavMeshData</span><span class="w"> </span><span class="n">newData</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">BuildNavMeshData</span><span class="p">(</span><span class="w"></span>
+<span class="w">   </span><span class="n">bSettings</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="n">buildSources</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="n">patchBounds</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="n">Quaternion</span><span class="p">.</span><span class="n">Euler</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">));</span><span class="w"></span>
+</code></pre></div>
+<p>The first three parameters there, we've already discussed, the fourth is the center of the <strong>NavMesh</strong> and should match the center position of patch bounds, and the last is the "up" vector for the local space.</p>
+<p>This is where the real work is happening.   Once it completes, we effectively have our new <strong>NavMesh</strong> in hand, and we just need to make it available to the scene.</p>
+<h3 id="add-the-navmesh-to-the-scene">Add the NavMesh to the Scene<a class="headerlink" href="#add-the-navmesh-to-the-scene" title="Permanent link">&para;</a></h3>
+<p>This one's easy, too:</p>
+<div class="highlight"><pre><span></span><code><span class="n">NavMesh</span><span class="p">.</span><span class="n">AddNavMeshData</span><span class="p">(</span><span class="n">meshData</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>The new NavMesh will be available for NavMeshAgents and viewing in the Scene editor on the next frame.   Note that if this is a <em>replacement</em> for an existing NavMesh (you're moving around a large open world with a floating origin system that moves the terrains, <a href="htttps://ckempke.github.io/UnityTerrainGeneration">hypothetically</a>), there are a couple more steps:</p>
+<p>First, we'll need to remove the existing NavMesh before we add the new one.</p>
+<div class="highlight"><pre><span></span><code><span class="n">NavMesh</span><span class="p">.</span><span class="n">RemoveAllNavMeshData</span><span class="p">();</span><span class="w"></span>
+<span class="n">NavMesh</span><span class="p">.</span><span class="n">AddNavMeshData</span><span class="p">(</span><span class="n">meshData</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>And second, we'll need to walk through every <strong>NavMeshAgent</strong> and "re-attach" them to the new mesh by calling <code>NavMesh.SamplePosition()</code> and <code>NavMeshAgent.Warp()</code> on them.</p>
+<p>That's it!   We've successfully made a <strong>NavMesh</strong> at runtime.   We're done!</p>
+<h2 id="wait-why-are-you-still-here">Wait, why are you still here?<a class="headerlink" href="#wait-why-are-you-still-here" title="Permanent link">&para;</a></h2>
+<p>OK, <em>maybe</em> we're done.   Does your game have discrete levels with loading screens or other natural breaks between them?   Then the code above should work fine for you.   The fact that the <strong>NavMesh</strong> takes a fairly long time to generate can be "hidden" in the level transition, even an extra second might not be a dealbreaker.</p>
+<p>But how 'bout that floating origin system we were talking about, above—or a game where deformation of the levels (explosions taking out walls, collapsing floors, sliding walls, portcullises, or whatever) can invalidate the <strong>NavMesh</strong> during play, requiring us to rebuild one.</p>
+<p>Well, the above code might still work for you.  It depends on the complexity (and raw size) of your level, and the frame rate you want to maintain.  Turn-based games might still be fine.   Maybe.</p>
+<p>Let's look at some numbers.    I just used the <strong>System.Diagnostics.Stopwatch</strong> to record elapsed time markers in at various places, them printed them out after the process was complete (using Debug.Log or other printing during the process would affect the results).</p>
+<p>Assuming we want our game to run at 120 frames/second, that gives us a budget of 1000/120 = about 8 milliseconds per frame.   Your frame rate needs may vary.   That 8 ms is the <em>total</em> time available; not just for mesh generation, but everything else that Unity needs to do in a frame.    That's a perfect world -- it's usually OK for a frame to occasionally run long, but we need the total number of milliseconds per frame to be low, ideally single digits.</p>
+<p>So here's my results on two different machines.   The first is a first generation Apple Silicon Mac, (Mac Studio M1 "Max", if it matters), and the other on a PC with a Ryzen 7 3700 processor and an Nvidia RTX 3080 video card, so comparable, high-end systems in most respects:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Mac</th>
+<th>Windows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collect Sources</td>
+<td>0 ms</td>
+<td>1 ms</td>
+</tr>
+<tr>
+<td>Get Build Sources</td>
+<td>1 ms</td>
+<td>2 ms</td>
+</tr>
+<tr>
+<td>Build NavMesh</td>
+<td>780 ms</td>
+<td>1280 ms</td>
+</tr>
+<tr>
+<td>Add To NavMesh</td>
+<td>1 ms</td>
+<td>0 ms</td>
+</tr>
+</tbody>
+</table>
+<p>So...Good News and Bad News?   Those small numbers have some randomness in them because I'm only sampling to the millisecond, but clearly most of these steps aren't going to give us any trouble.</p>
+<p>The problem, clearly, is that Build <strong>NavMesh</strong> step.     This was for a 700 meter radius on a generated terrain.  Not huge, by level standards, but it took more than a <em>second</em> on Windows, and a significant fraction of one on the Mac.    And remember that these are high-end systems.  The average mid-range gaming machine or MacBook Air is going to do a lot worse.</p>
+<p>By lowering the radius to 250 meters, I got down to about 100 ms on the Mac, so we have one knob we can play with.   But even with that change, there's a very, very obvious stutter when the <strong>NavMesh</strong> rebuilds.   It would be almost impossible to hide.</p>
+<p>We could lower the radius even more (maybe 50 meters), and build a little bit of the mesh each frame, adding them together over time.    But that's a pain to write, and we'd be better off using some asynchronous method (co-routines, jobs, or some other mechanism) to spread the work out more conventionally, instead.</p>
+<p>So let's look back at that <strong>NavMeshBuilder</strong> documentation page.</p>
+<p><img alt="Unity Online Manual Page for NavMeshBuilder" src="../blogmedia/navmeshdoc.jpg" /></p>
+<p>There it is!  "<strong>BuildNavMeshAsync</strong>!"  We're saved.</p>
+<p>...except for that "(UnityEditor)" at the end of it.   It's literally exactly what we want, but we're not allowed to use it at runtime.</p>
+<blockquote>
+<p>Aside:   OK, what the HECK Unity?   In what possible universe does it make sense for the non-time-dependent editor building to be asynchronous, but the runtime version where literally 100% of the users are going to need it to be fast not be?   That's not just annoying, it's way past the line into "actively malicious."</p>
+</blockquote>
+<p>At this point we should run through our list of obscenities, but once we're done, note that there's one more possibility:  <code>UpdateNavMeshDataAsync()</code>.    This is similar to <code>BuildNavMeshData</code>, except that it <em>adds</em> or <em>removes</em> data from an existing <strong>NavMeshData</strong> object (and doesn't take an "up" vector, so it can only be used for standard orientations).    We can work with that.   It's a little weird, but if we just make an empty <strong>NavMeshData</strong> object and then "Update" it with <em>all</em> the data, we'll get the same end result.  Something like:</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="c1">// Make a new mesh data object.</span>
+<span class="n">NavMeshData</span><span class="w"> </span><span class="n">meshData</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NavMeshData</span><span class="p">();</span><span class="w"></span>
+
+<span class="c1">// &quot;Update&quot; it from scratch.</span>
+<span class="n">AsyncOperation</span><span class="w"> </span><span class="n">buildOp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">UpdateNavMeshDataAsync</span><span class="p">(</span><span class="n">meshData</span><span class="p">,</span><span class="w"> </span><span class="n">bSettings</span><span class="p">,</span><span class="w"> </span><span class="n">buildSources</span><span class="p">,</span><span class="w"> </span><span class="n">patchBounds</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>Note that <code>UpdateNavMeshDataAsync</code> returns an <strong>AsyncOperation</strong>, one of the approximately 52,937,419 different asynchronous mechanisms in .NET (the Flaming Eye of Microsoft is also easily distracted, <em>especially</em> with developer frameworks).    Off the top of my head, I don't even remember whether this one moves the work off-thread or not; for our purposes, it doesn't really matter.</p>
+<h3 id="rebuild-for-asynchronicity">Rebuild for Asynchronicity<a class="headerlink" href="#rebuild-for-asynchronicity" title="Permanent link">&para;</a></h3>
+<p>So the trick here is that we're going to need to move this work to a co-routine, and re-arrange things a little bit to make it work.   It's not going to be a perfect solution; it's still going to take some time for our new <strong>NavMesh</strong> to be ready, we're just not going to interrupt the rest of the game while we wait for it.   If you're in a scenario where you can keep using and old mesh until the new one is available; you should.    If you can't (your "terrain" objects are changing position, origin, or whatever), you'll need to be prepared for there to be some time when your <strong>NavMeshAgents</strong> have no mesh to use, and do something intelligent with that time (move them in a straight line, idle them, have them stand and guard or taunt, whatever).</p>
+<p>But in return for that bit of complexity, we should be able to easily do the actual mesh exchange in a millisecond or two, so frame rate shouldn't t be affected at all.</p>
+<p>Your coroutine may look a little different from mine, depending on where you get some of your parameters from, but I'm going to pass in the center point of the new mesh bounds, a single radius for all axes, and a boolean flag for whether I'm adding to or replacing an existing mesh.</p>
+<p>Here's the whole thing:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">/// &lt;summary&gt;</span>
+<span class="c1">/// Coroutine to rebuild the current Scene NavMesh.</span>
+<span class="c1">/// &lt;/summary&gt;</span>
+<span class="c1">/// &lt;param name=&quot;playerPosition&quot;&gt;The center of the mesh search volume&lt;/param&gt;</span>
+<span class="c1">/// &lt;param name=&quot;navigationMeshRadius&quot;&gt;How big a volume should we search for surfaces in.&lt;/param&gt;</span>
+<span class="c1">/// &lt;param name=&quot;rebuildAll&quot;&gt;If &quot;true&quot;, delete any existing meshes before adding new ones.&lt;/param&gt;</span>
+<span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+<span class="n">IEnumerator</span><span class="w"> </span><span class="nf">NavMeshOutOfDateCoroutine</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">playerPosition</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">rebuildAll</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Get the list of all &quot;sources&quot; around us.  This is basically little gridded subsquares</span>
+<span class="w">        </span><span class="c1">// of our terrains.</span>
+<span class="w">        </span><span class="n">List</span><span class="p">&lt;</span><span class="n">NavMeshBuildSource</span><span class="p">&gt;</span><span class="w"> </span><span class="n">buildSources</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">NavMeshBuildSource</span><span class="p">&gt;();</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// Set up a boundary area for the build sources collector to look at;</span>
+<span class="w">        </span><span class="n">Bounds</span><span class="w"> </span><span class="n">patchBounds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bounds</span><span class="p">(</span><span class="n">playerPosition</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">));</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// This actually collects the potential surfaces.</span>
+<span class="w">        </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">CollectSources</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="n">patchBounds</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="m">1</span><span class="w"> </span><span class="p">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;Terrain&quot;</span><span class="p">),</span><span class="w"></span>
+<span class="w">            </span><span class="n">NavMeshCollectGeometry</span><span class="p">.</span><span class="n">PhysicsColliders</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="m">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">NavMeshBuildMarkup</span><span class="p">&gt;(),</span><span class="w"></span>
+<span class="w">            </span><span class="n">buildSources</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// Build some empty NavMeshData objects</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">numAgentTypes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">GetSettingsCount</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">NavMeshData</span><span class="p">[]</span><span class="w"> </span><span class="n">meshData</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NavMeshData</span><span class="p">[</span><span class="n">numAgentTypes</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="n">numAgentTypes</span><span class="p">;</span><span class="w"> </span><span class="n">agentIndex</span><span class="p">++)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// Get the settings for each of our agent &quot;sizes&quot; (humanoid, giant humanoid)</span>
+<span class="w">            </span><span class="n">NavMeshBuildSettings</span><span class="w"> </span><span class="n">bSettings</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">GetSettingsByIndex</span><span class="p">(</span><span class="n">agentIndex</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1">// If there are any issues with the agent, print them out as a warning.</span>
+<span class="cp">#if DEBUG</span><span class="w"></span>
+<span class="w">            </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">bSettings</span><span class="p">.</span><span class="n">ValidationReport</span><span class="p">(</span><span class="n">patchBounds</span><span class="p">))</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">$&quot;BuildSettings Report: {NavMesh.GetSettingsNameFromID(bSettings.agentTypeID)} : {s}&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="cp">#endif</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// Make empty mesh data object.</span>
+<span class="w">            </span><span class="n">meshData</span><span class="p">[</span><span class="n">agentIndex</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NavMeshData</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">AsyncOperation</span><span class="w"> </span><span class="n">buildOp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">UpdateNavMeshDataAsync</span><span class="p">(</span><span class="n">meshData</span><span class="p">[</span><span class="n">agentIndex</span><span class="p">],</span><span class="w"> </span><span class="n">bSettings</span><span class="p">,</span><span class="w"> </span><span class="n">buildSources</span><span class="p">,</span><span class="w"> </span><span class="n">patchBounds</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(!</span><span class="n">buildOp</span><span class="p">.</span><span class="n">isDone</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// If we&#39;re just rebuilding because we&#39;ve moved far enough that we might have left our</span>
+<span class="w">        </span><span class="c1">// mesh (meshes are smaller than patches in most cases), we should NOT remove the existing</span>
+<span class="w">        </span><span class="c1">// navMesh, but just add to it.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rebuildAll</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">RemoveAllNavMeshData</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">nmd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">nmd</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="n">meshData</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">nmd</span><span class="p">++)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">AddNavMeshData</span><span class="p">(</span><span class="n">meshData</span><span class="p">[</span><span class="n">nmd</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>There are a few key lines there, particularly the various <code>yield return null;</code> ones.  If you're not familiar with coroutines, that's just code for "stop here for this frame, go do whatever else you want, and resume here on the next frame."</p>
+<p>In particular, most of the (non) work is done by:</p>
+<div class="highlight"><pre><span></span><code><span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(!</span><span class="n">buildOp</span><span class="p">.</span><span class="n">isDone</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>That line is where most of the time in the coroutine is spent.  It just checks to see "is the AsyncOperation done, yet?" And yields until the next frame if it isn't.   Eventually, everything completes and the rest of the code takes only a few milliseconds to actually instantiate the mesh.</p>
+<p>Also note that we build all the meshes, <em>then</em> remove existing ones (if we're going to), <em>then</em> add the new ones all at once rather than as each one is built.   This minimizes the time when no mesh exists at all -- in fact, since there's no <code>yield</code> between the removal and the adds, the new mesh should be available in the very same frame as the old one goes away.  (The old <strong>NavMesh</strong> may or may not still be valid that long, but for most uses it won't matter if it hangs around while we make the new one.)</p>
+<h3 id="so-does-it-work">So does it work?<a class="headerlink" href="#so-does-it-work" title="Permanent link">&para;</a></h3>
+<p>In a nutshell, yes.  There's no stutter at all when new <strong>NavMeshes</strong> are being built or instantiated; I had to put Debug logging in or keep the scene window open even to know when it happened.   Was it worth all that effort?  Also, yes; being able to build at runtime without destroying the frame rate makes possible scenarios that otherwise wouldn't be, even if the "wait" for the <strong>NavMesh</strong> to become available isn't ideal.</p>
+<p>For small <strong>NavMeshes</strong> (a simple dungeon level, basement, maybe even a small village or house), this may very well be usable even several times a second (it can't be <em>every frame</em> because of the <code>yield returns</code>).   And for much larger or more complex meshes, it at least makes building them <em>possible</em>.</p>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+      
+    
+  </body>
+</html>
