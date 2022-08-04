@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#background" class="md-skip">
+        <a href="#asynchronous-runtime-navmesh-generation-in-unity" class="md-skip">
           Skip to content
         </a>
       
@@ -235,6 +235,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -296,74 +298,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#using-navmeshbuilder" class="md-nav__link">
-    Using NavMeshBuilder
-  </a>
-  
-    <nav class="md-nav" aria-label="Using NavMeshBuilder">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#collecting-sources" class="md-nav__link">
-    Collecting Sources
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-the-build-settings-for-each-agent-type" class="md-nav__link">
-    Get the Build Settings for each Agent Type
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#build-the-navmeshdata" class="md-nav__link">
-    Build the NavMeshData
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-the-navmesh-to-the-scene" class="md-nav__link">
-    Add the NavMesh to the Scene
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wait-why-are-you-still-here" class="md-nav__link">
-    Wait, why are you still here?
-  </a>
-  
-    <nav class="md-nav" aria-label="Wait, why are you still here?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rebuild-for-asynchronicity" class="md-nav__link">
-    Rebuild for Asynchronicity
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#so-does-it-work" class="md-nav__link">
-    So does it work?
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -378,6 +312,7 @@
                 
 
 
+<h1 id="asynchronous-runtime-navmesh-generation-in-unity">Asynchronous Runtime Navmesh Generation in Unity<a class="headerlink" href="#asynchronous-runtime-navmesh-generation-in-unity" title="Permanent link">&para;</a></h1>
 <p>Buckle in, boys and girls.  This one's going to be a ride.</p>
 <p>I've recently started trying to add monsters to the world I'm creating over in my <a href="https://ckempke.github.io/UnityTerrainGeneration">Unity Procedural Terrain</a> system.   I'd like to use the <strong>NavMesh</strong> system for enemy AI, but since my terrains aren't created in the Unity Editor, but rather randomly at runtime, I need to be able to create the <strong>NavMeshes</strong> for my monsters at runtime.</p>
 <p>And thus began the rabbit hole.   It became quickly obvious that <em>it could be done,</em> but equally obvious that there wasn't really a good known solution out there, particularly one that was performant enough to use in a runtime environment where terrains were being created and destroyed at a reasonably fast cadence as the player moves around a large open world.</p>
