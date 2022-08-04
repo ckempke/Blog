@@ -8,6 +8,10 @@ I'll assume you're now of my legions of fans that have come from the Terrain Gen
 
 You'll be ecstatic to learn that this is a much more traditional "Blog" format, with, like, dated pages and "most-recent-at-the-top" and all that cool stuff that was state of the art in the late 90's.
 
+If you have comments, you can e-mail them to me at my gmail.com address of "Christopher.kempke."
+
+## The Actual Blog
+
 {{ blog_content }}
 
 ## About this Site

@@ -1,6 +1,7 @@
 ---
 title: "Asynchronous Runtime Navmesh Generation in Unity"
-date: 2022-6-2
+date: 2022-8-3
+author: Christopher Kempke
 tags: 
   - Unity
   - Procedural Generation.
