@@ -298,6 +298,74 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#using-navmeshbuilder" class="md-nav__link">
+    Using NavMeshBuilder
+  </a>
+  
+    <nav class="md-nav" aria-label="Using NavMeshBuilder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collecting-sources" class="md-nav__link">
+    Collecting Sources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-the-build-settings-for-each-agent-type" class="md-nav__link">
+    Get the Build Settings for each Agent Type
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-the-navmeshdata" class="md-nav__link">
+    Build the NavMeshData
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-the-navmesh-to-the-scene" class="md-nav__link">
+    Add the NavMesh to the Scene
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wait-why-are-you-still-here" class="md-nav__link">
+    Wait, why are you still here?
+  </a>
+  
+    <nav class="md-nav" aria-label="Wait, why are you still here?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rebuild-for-asynchronicity" class="md-nav__link">
+    Rebuild for Asynchronicity
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-does-it-work" class="md-nav__link">
+    So does it work?
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -430,11 +498,11 @@
 <p>As with all things runtime, we can only use the functions in UnityEngine.AI; editor functions aren't available to us.   We'll come back to this in a bit.</p>
 <p>If you need to know the answer, you can skip to the end.   But I think it's important to understand how to do it wrong, and use the learnings from that to figure out how to do it right.</p>
 <h3 id="components-for-runtime-navmesh-building">Components for Runtime NavMesh Building.<a class="headerlink" href="#components-for-runtime-navmesh-building" title="Permanent link">&para;</a></h3>
-<p>So to start with, users have been wanting build NavMeshes at runtime for a very long time, probably as long as NavMesh has existed.   At Unity headquarters, great flaming eye perches atop a dark tower, sweeping over the landscape looking for developers to torture.    At some point about 2016, it settled on developers trying to build runtime NavMeshes.</p>
+<p>So to start with, users have been wanting build NavMeshes at runtime for a very long time, probably as long as NavMesh has existed.   At Unity headquarters, a great flaming eye perches atop a dark tower, sweeping over the landscape looking for developers to torture.    At some point about 2016, it settled on developers trying to build runtime NavMeshes.</p>
 <p>The result was something called "Components for Runtime NavMesh Building."   You can learn all about it in a <a href="https://learn.unity.com/tutorial/runtime-navmesh-generation?uv=2017.1">Unity Learn Tutorial here</a>.   These were a set of "prerelease" components available from a Github project that were eventually meant to end up in Unity itself.   They worked by adding a component (<strong>NavMeshSurface</strong>) to the gameObjects that are part of the "environment" and then calling a function to go out and find all these, and use them to build a NavMesh.   But the Eye of Unity is easily distracted, and it quickly went off to start a new incompatible render pipeline or something.</p>
 <p>This tutorial makes two claims of note:  that these would eventually become part of Unity itself (they didn't), and that they are fast enough to use at runtime, even every frame, at least on simple stuff.    That second claim is likely true for things like procedural dungeons with relatively simple structures, but it sure doesn't seem to work that fast on Terrains.</p>
 <p>You still see poor lost souls wandering the Internet trying to use these; any reference to <strong>NavMeshSurface</strong> is a red flag.   Back away slowly and don't make eye contact.   I've actually managed to get them working even in Unity 2021.3, but the fact that these components have been abandoned for half a decade now doesn't give us confidence in using them.</p>
-<h1 id="using-navmeshbuilder">Using NavMeshBuilder<a class="headerlink" href="#using-navmeshbuilder" title="Permanent link">&para;</a></h1>
+<h2 id="using-navmeshbuilder">Using NavMeshBuilder<a class="headerlink" href="#using-navmeshbuilder" title="Permanent link">&para;</a></h2>
 <p>So let's go back to the "low level" API, and try to build this ourselves.  There are basically four steps that we need to perform:</p>
 <p>1) Collect a list of the surfaces we're interested in some volume of (virtual) space.
 2) Get descriptions of each of the "agent types" we're going to build the NavMeshes for.
@@ -578,7 +646,7 @@
 </code></pre></div>
 <p>Note that <code>UpdateNavMeshDataAsync</code> returns an <strong>AsyncOperation</strong>, one of the approximately 52,937,419 different asynchronous mechanisms in .NET (the Flaming Eye of Microsoft is also easily distracted, <em>especially</em> with developer frameworks).    Off the top of my head, I don't even remember whether this one moves the work off-thread or not; for our purposes, it doesn't really matter.</p>
 <h3 id="rebuild-for-asynchronicity">Rebuild for Asynchronicity<a class="headerlink" href="#rebuild-for-asynchronicity" title="Permanent link">&para;</a></h3>
-<p>So the trick here is that we're going to need to move this work to a co-routine, and re-arrange things a little bit to make it work.   It's not going to be a perfect solution; it's still going to take some time for our new <strong>NavMesh</strong> to be ready, we're just not going to interrupt the rest of the game while we wait for it.   If you're in a scenario where you can keep using and old mesh until the new one is available; you should.    If you can't (your "terrain" objects are changing position, origin, or whatever), you'll need to be prepared for there to be some time when your <strong>NavMeshAgents</strong> have no mesh to use, and do something intelligent with that time (move them in a straight line, idle them, have them stand and guard or taunt, whatever).</p>
+<p>So the trick here is that we're going to need to move this work to a co-routine, and re-arrange things a little bit to make it work.   It's not going to be a perfect solution; it's still going to take some time for our new <strong>NavMesh</strong> to be ready, we're just not going to interrupt the rest of the game while we wait for it.   If you're in a scenario where you can keep using the old mesh until the new one is available; you should.    If you can't (your "terrain" objects are changing position, origin, or whatever), you'll need to be prepared for there to be some time when your <strong>NavMeshAgents</strong> have no mesh to use, and do something intelligent with that time (move them in a straight line, idle them, have them stand and guard, or taunt, whatever).</p>
 <p>But in return for that bit of complexity, we should be able to easily do the actual mesh exchange in a millisecond or two, so frame rate shouldn't t be affected at all.</p>
 <p>Your coroutine may look a little different from mine, depending on where you get some of your parameters from, but I'm going to pass in the center point of the new mesh bounds, a single radius for all axes, and a boolean flag for whether I'm adding to or replacing an existing mesh.</p>
 <p>Here's the whole thing:</p>
@@ -634,9 +702,6 @@
 <span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(!</span><span class="n">buildOp</span><span class="p">.</span><span class="n">isDone</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1">// If we&#39;re just rebuilding because we&#39;ve moved far enough that we might have left our</span>
-<span class="w">        </span><span class="c1">// mesh (meshes are smaller than patches in most cases), we should NOT remove the existing</span>
-<span class="w">        </span><span class="c1">// navMesh, but just add to it.</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rebuildAll</span><span class="p">)</span><span class="w"></span>
 <span class="w">        </span><span class="p">{</span><span class="w"></span>
 <span class="w">            </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">RemoveAllNavMeshData</span><span class="p">();</span><span class="w"></span>
@@ -656,7 +721,7 @@
 </code></pre></div>
 <p>That line is where most of the time in the coroutine is spent.  It just checks to see "is the AsyncOperation done, yet?" And yields until the next frame if it isn't.   Eventually, everything completes and the rest of the code takes only a few milliseconds to actually instantiate the mesh.</p>
 <p>Also note that we build all the meshes, <em>then</em> remove existing ones (if we're going to), <em>then</em> add the new ones all at once rather than as each one is built.   This minimizes the time when no mesh exists at all -- in fact, since there's no <code>yield</code> between the removal and the adds, the new mesh should be available in the very same frame as the old one goes away.  (The old <strong>NavMesh</strong> may or may not still be valid that long, but for most uses it won't matter if it hangs around while we make the new one.)</p>
-<h3 id="so-does-it-work">So does it work?<a class="headerlink" href="#so-does-it-work" title="Permanent link">&para;</a></h3>
+<h2 id="so-does-it-work">So does it work?<a class="headerlink" href="#so-does-it-work" title="Permanent link">&para;</a></h2>
 <p>In a nutshell, yes.  There's no stutter at all when new <strong>NavMeshes</strong> are being built or instantiated; I had to put Debug logging in or keep the scene window open even to know when it happened.   Was it worth all that effort?  Also, yes; being able to build at runtime without destroying the frame rate makes possible scenarios that otherwise wouldn't be, even if the "wait" for the <strong>NavMesh</strong> to become available isn't ideal.</p>
 <p>For small <strong>NavMeshes</strong> (a simple dungeon level, basement, maybe even a small village or house), this may very well be usable even several times a second (it can't be <em>every frame</em> because of the <code>yield returns</code>).   And for much larger or more complex meshes, it at least makes building them <em>possible</em>.</p>
 
