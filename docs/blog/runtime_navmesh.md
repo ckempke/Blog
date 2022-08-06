@@ -187,7 +187,7 @@ If you need to know the answer, you can skip to the end.   But I think it's impo
 
 ### Components for Runtime NavMesh Building.
 
-So to start with, users have been wanting build NavMeshes at runtime for a very long time, probably as long as NavMesh has existed.   At Unity headquarters, great flaming eye perches atop a dark tower, sweeping over the landscape looking for developers to torture.    At some point about 2016, it settled on developers trying to build runtime NavMeshes.
+So to start with, users have been wanting build NavMeshes at runtime for a very long time, probably as long as NavMesh has existed.   At Unity headquarters, a great flaming eye perches atop a dark tower, sweeping over the landscape looking for developers to torture.    At some point about 2016, it settled on developers trying to build runtime NavMeshes.
 
 The result was something called "Components for Runtime NavMesh Building."   You can learn all about it in a [Unity Learn Tutorial here](https://learn.unity.com/tutorial/runtime-navmesh-generation?uv=2017.1).   These were a set of "prerelease" components available from a Github project that were eventually meant to end up in Unity itself.   They worked by adding a component (**NavMeshSurface**) to the gameObjects that are part of the "environment" and then calling a function to go out and find all these, and use them to build a NavMesh.   But the Eye of Unity is easily distracted, and it quickly went off to start a new incompatible render pipeline or something.
 
@@ -195,7 +195,7 @@ This tutorial makes two claims of note:  that these would eventually become part
 
 You still see poor lost souls wandering the Internet trying to use these; any reference to **NavMeshSurface** is a red flag.   Back away slowly and don't make eye contact.   I've actually managed to get them working even in Unity 2021.3, but the fact that these components have been abandoned for half a decade now doesn't give us confidence in using them.
 
-# Using NavMeshBuilder
+## Using NavMeshBuilder
 
 So let's go back to the "low level" API, and try to build this ourselves.  There are basically four steps that we need to perform:
 
@@ -383,7 +383,7 @@ Note that `UpdateNavMeshDataAsync` returns an **AsyncOperation**, one of the ap
 
 ### Rebuild for Asynchronicity
 
-So the trick here is that we're going to need to move this work to a co-routine, and re-arrange things a little bit to make it work.   It's not going to be a perfect solution; it's still going to take some time for our new **NavMesh** to be ready, we're just not going to interrupt the rest of the game while we wait for it.   If you're in a scenario where you can keep using and old mesh until the new one is available; you should.    If you can't (your "terrain" objects are changing position, origin, or whatever), you'll need to be prepared for there to be some time when your **NavMeshAgents** have no mesh to use, and do something intelligent with that time (move them in a straight line, idle them, have them stand and guard or taunt, whatever).
+So the trick here is that we're going to need to move this work to a co-routine, and re-arrange things a little bit to make it work.   It's not going to be a perfect solution; it's still going to take some time for our new **NavMesh** to be ready, we're just not going to interrupt the rest of the game while we wait for it.   If you're in a scenario where you can keep using the old mesh until the new one is available; you should.    If you can't (your "terrain" objects are changing position, origin, or whatever), you'll need to be prepared for there to be some time when your **NavMeshAgents** have no mesh to use, and do something intelligent with that time (move them in a straight line, idle them, have them stand and guard, or taunt, whatever).
 
 But in return for that bit of complexity, we should be able to easily do the actual mesh exchange in a millisecond or two, so frame rate shouldn't t be affected at all.
 
@@ -443,10 +443,7 @@ IEnumerator NavMeshOutOfDateCoroutine(Vector3 playerPosition, float navigationMe
 
             while (!buildOp.isDone) yield return null;
         }
-
-        // If we're just rebuilding because we've moved far enough that we might have left our
-        // mesh (meshes are smaller than patches in most cases), we should NOT remove the existing
-        // navMesh, but just add to it.
+  
         if (rebuildAll)
         {
             NavMesh.RemoveAllNavMeshData();
@@ -474,7 +471,7 @@ That line is where most of the time in the coroutine is spent.  It just checks t
 
 Also note that we build all the meshes, _then_ remove existing ones (if we're going to), _then_ add the new ones all at once rather than as each one is built.   This minimizes the time when no mesh exists at all -- in fact, since there's no `yield` between the removal and the adds, the new mesh should be available in the very same frame as the old one goes away.  (The old **NavMesh** may or may not still be valid that long, but for most uses it won't matter if it hangs around while we make the new one.)
 
-### So does it work?
+## So does it work?
 
 In a nutshell, yes.  There's no stutter at all when new **NavMeshes** are being built or instantiated; I had to put Debug logging in or keep the scene window open even to know when it happened.   Was it worth all that effort?  Also, yes; being able to build at runtime without destroying the frame rate makes possible scenarios that otherwise wouldn't be, even if the "wait" for the **NavMesh** to become available isn't ideal.
 
