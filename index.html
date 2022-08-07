@@ -287,6 +287,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tags/" class="md-nav__link">
+        Posts by Topic
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -369,10 +384,11 @@
   <h1>Home</h1>
 
 <p>Welcome to my little corner of the Internet!</p>
-<p>I'll assume you're now of my legions of fans that have come from the Terrain Generation pages: <a href="https://ckempke.github.io/UnityTerrainGeneration">https://ckempke.github.io/UnityTerrainGeneration</a> with questions like "wait, you have legions of fans?" and "how do I actually find what's new on that site, anyway?"     </p>
+<p>I'll assume you're one of my legions of fans that have come from the Terrain Generation pages: <a href="https://ckempke.github.io/UnityTerrainGeneration">https://ckempke.github.io/UnityTerrainGeneration</a> with questions like "wait, you have legions of fans?" and "how do I actually find what's new on that site, anyway?"     </p>
 <p>You'll be ecstatic to learn that this is a much more traditional "Blog" format, with, like, dated pages and "most-recent-at-the-top" and all that cool stuff that was state of the art in the late 90's.</p>
 <h2 id="the-actual-blog">The Actual Blog<a class="headerlink" href="#the-actual-blog" title="Permanent link">&para;</a></h2>
 <p>
+
 
 
 <style>
@@ -422,7 +438,80 @@
     }
 </style>
 
+<style>
+    .blog-override-post {
+        padding: 30px 60px 30px 0;
+        margin-top: 10px;
+        border: 1px solid transparent;
+        cursor: default;
+    }
 
+    .blog-override-post .blog-post-title {
+        color: var(--md-typeset-a-color);
+        margin-top: 0;
+    }
+
+    .blog-post-description {
+        color: var(--md-typeset-color);
+    }
+
+    .blog-override-post:first-of-type {
+        margin-top: 0;
+    }
+
+    .blog-override-post:hover {
+        border: 1px solid #e8e8e877;
+        box-shadow: 3px 4px 10px #e8e8e8;
+    }
+
+    .blog-override-post,
+    .blog-override-post>* {
+        transition: all 0.3s ease-in-out;
+    }
+
+    .blog-override-post:hover>* {
+        transform: translateX(30px);
+    }
+
+    .blog-post-description,
+    .blog-post-extra {
+        opacity: 0.8;
+    }
+
+    .blog-override-post:hover .blog-post-description,
+    .blog-override-post:hover .blog-post-extra {
+        opacity: 1;
+    }
+
+    @media only screen and (max-width: 1000px) {
+        .blog-override-post,
+        .blog-override-post>* {
+            transition: none;
+        }
+
+        .blog-override-post:hover>* {
+            transform: none;
+        }
+
+        .blog-override-post {
+            padding: 30px 0 30px 0;
+            border: none;
+            cursor: pointer;
+        }
+
+        .blog-override-post:hover {
+            border: none;
+            box-shadow: none;
+        }
+
+        .blog-post-description,
+        .blog-post-extra,
+        .blog-override-post:hover .blog-post-description,
+        .blog-override-post:hover .blog-post-extra {
+            opacity: 1;
+        }
+    }
+</style>
 
 
 
@@ -463,8 +552,6 @@
 
 
 
-
-
 <div class="pages">
     
         
@@ -478,36 +565,39 @@
 
                 
                 
+                    
+                
 
                 
                 
                     
                 
                 
-                <div class="blog-post">
-    <h3 class="blog-post-title">
-        <a class="link" href="https://ckempke.github.io/Blog/blog/runtime_navmesh/">Asynchronous Runtime Navmesh Generation in Unity</a>
-    </h3>
-    
-        <div class="blogging-tags-grid">
+                <a href="https://ckempke.github.io/Blog/blog/runtime_navmesh/">
+    <div class="blog-override-post">
+        <h3 class="blog-post-title">Asynchronous Runtime Navmesh Generation in Unity</h3>
         
-        <a href="#Unity" class="blogging-tag"><code>#Unity</code></a>
+            <div class="blogging-tags-grid">
         
-        <a href="#Procedural Generation." class="blogging-tag"><code>#Procedural Generation.</code></a>
+        <code style="color: var(--md-typeset-color)">#Unity</code>
+        
+        <code style="color: var(--md-typeset-color)">#procedural generation</code>
+        
+        <code style="color: var(--md-typeset-color)">#technology</code>
+        
+        <code style="color: var(--md-typeset-color)">#games</code>
         
     </div>
     
-        
+            
 
-    
-    <p class="blog-post-description">
         
-    </p>
-    <div class="blog-post-extra">
-        Published at: 2022-08-03 00:00:00
+        <p class="blog-post-description">Trying to make Unity&#39;s navigation AI system work for procedural environments.</p>
+        <div class="blog-post-extra">
+            Published at: 2022-08-03 00:00:00
+        </div>
     </div>
-    <hr />
-</div>
+</a>
 
                 
             
@@ -526,32 +616,29 @@
                     
                 
                 
-                <div class="blog-post">
-    <h3 class="blog-post-title">
-        <a class="link" href="https://ckempke.github.io/Blog/blog/1-AUG-2022/">Hello, World!</a>
-    </h3>
-    
-        <div class="blogging-tags-grid">
+                <a href="https://ckempke.github.io/Blog/blog/1-AUG-2022/">
+    <div class="blog-override-post">
+        <h3 class="blog-post-title">Hello, World!</h3>
         
-        <a href="#mkdocs" class="blogging-tag"><code>#mkdocs</code></a>
+            <div class="blogging-tags-grid">
         
-        <a href="#blogging" class="blogging-tag"><code>#blogging</code></a>
+        <code style="color: var(--md-typeset-color)">#mkdocs</code>
         
-        <a href="#github-pages" class="blogging-tag"><code>#github-pages</code></a>
+        <code style="color: var(--md-typeset-color)">#blogging</code>
+        
+        <code style="color: var(--md-typeset-color)">#github-pages</code>
         
     </div>
     
-        
+            
 
-    
-    <p class="blog-post-description">
-        Hello, World!
-    </p>
-    <div class="blog-post-extra">
-        Published at: 2022-08-02 04:41:27
+        
+        <p class="blog-post-description">Hello, World!</p>
+        <div class="blog-post-extra">
+            Published at: 2022-08-02 04:41:27
+        </div>
     </div>
-    <hr />
-</div>
+</a>
 
                 
             
@@ -568,19 +655,27 @@
                     
                 
                 
-                <div class="blog-post">
-    <h3 class="blog-post-title">
-        <a class="link" href="https://ckempke.github.io/Blog/blog/8-DEC-2021/">If its &#34;it is&#34;, its &#34;its&#34; is &#34;it&#39;s&#34;</a>
-    </h3>
-    
-    <p class="blog-post-description">
+                <a href="https://ckempke.github.io/Blog/blog/8-DEC-2021/">
+    <div class="blog-override-post">
+        <h3 class="blog-post-title">If its &#34;it is&#34;, its &#34;its&#34; is &#34;it&#39;s&#34;</h3>
         
-    </p>
-    <div class="blog-post-extra">
-        Published at: 2021-12-08 00:00:00
+            <div class="blogging-tags-grid">
+        
+        <code style="color: var(--md-typeset-color)">#writing</code>
+        
+        <code style="color: var(--md-typeset-color)">#grammar</code>
+        
     </div>
-    <hr />
-</div>
+    
+            
+
+        
+        <p class="blog-post-description"></p>
+        <div class="blog-post-extra">
+            Published at: 2021-12-08 00:00:00
+        </div>
+    </div>
+</a>
 
                 
             
@@ -597,19 +692,29 @@
                     
                 
                 
-                <div class="blog-post">
-    <h3 class="blog-post-title">
-        <a class="link" href="https://ckempke.github.io/Blog/blog/7-JULY-2021/">The nice thing about standards is that you have so many to choose from.</a>
-    </h3>
-    
-    <p class="blog-post-description">
+                <a href="https://ckempke.github.io/Blog/blog/7-JULY-2021/">
+    <div class="blog-override-post">
+        <h3 class="blog-post-title">The nice thing about standards is that you have so many to choose from.</h3>
         
-    </p>
-    <div class="blog-post-extra">
-        Published at: 2021-07-06 00:00:00
+            <div class="blogging-tags-grid">
+        
+        <code style="color: var(--md-typeset-color)">#mkdocs</code>
+        
+        <code style="color: var(--md-typeset-color)">#markdown</code>
+        
+        <code style="color: var(--md-typeset-color)">#technology</code>
+        
     </div>
-    <hr />
-</div>
+    
+            
+
+        
+        <p class="blog-post-description"></p>
+        <div class="blog-post-extra">
+            Published at: 2021-07-06 00:00:00
+        </div>
+    </div>
+</a>
 
                 
             
@@ -663,6 +768,27 @@
       </main>
       
         <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+      
+        
+        <a href="tags/" class="md-footer__link md-footer__link--next" aria-label="Next: Posts by Topic" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Posts by Topic
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

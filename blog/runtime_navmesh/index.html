@@ -6,6 +6,8 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="Trying to make Unity's navigation AI system work for procedural environments.">
+      
       
         <meta name="author" content="Christopher Kempke">
       
@@ -218,6 +220,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tags/" class="md-nav__link">
+        Posts by Topic
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -380,6 +397,36 @@
                 
 
 
+<div class="blogging-tags-grid">
+
+        <a href="https://ckempke.github.io/Blog/tags#Unity" class="blogging-tag"><code>#Unity</code></a>
+
+        <a href="https://ckempke.github.io/Blog/tags#procedural generation" class="blogging-tag"><code>#procedural generation</code></a>
+
+        <a href="https://ckempke.github.io/Blog/tags#technology" class="blogging-tag"><code>#technology</code></a>
+
+        <a href="https://ckempke.github.io/Blog/tags#games" class="blogging-tag"><code>#games</code></a>
+
+    </div>
+
+<style>
+    .md-typeset .blogging-tags-grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 5px;
+    }
+
+    .md-typeset .blogging-tag {
+        color: var(--md-typeset-color);
+        background-color: var(--md-typeset-code-color);
+    }
+
+    .md-typeset .blogging-tag code {
+        border-radius: 5px;
+    }
+</style>
 <h1 id="asynchronous-runtime-navmesh-generation-in-unity">Asynchronous Runtime Navmesh Generation in Unity<a class="headerlink" href="#asynchronous-runtime-navmesh-generation-in-unity" title="Permanent link">&para;</a></h1>
 <p>Buckle in, boys and girls.  This one's going to be a ride.</p>
 <p>I've recently started trying to add monsters to the world I'm creating over in my <a href="https://ckempke.github.io/UnityTerrainGeneration">Unity Procedural Terrain</a> system.   I'd like to use the <strong>NavMesh</strong> system for enemy AI, but since my terrains aren't created in the Unity Editor, but rather randomly at runtime, I need to be able to create the <strong>NavMeshes</strong> for my monsters at runtime.</p>

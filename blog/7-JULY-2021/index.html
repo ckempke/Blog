@@ -211,6 +211,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tags/" class="md-nav__link">
+        Posts by Topic
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -243,6 +258,34 @@
 
   <h1>The nice thing about standards is that you have so many to choose from.</h1>
 
+<div class="blogging-tags-grid">
+
+        <a href="https://ckempke.github.io/Blog/tags#mkdocs" class="blogging-tag"><code>#mkdocs</code></a>
+
+        <a href="https://ckempke.github.io/Blog/tags#markdown" class="blogging-tag"><code>#markdown</code></a>
+
+        <a href="https://ckempke.github.io/Blog/tags#technology" class="blogging-tag"><code>#technology</code></a>
+
+    </div>
+
+<style>
+    .md-typeset .blogging-tags-grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 5px;
+    }
+
+    .md-typeset .blogging-tag {
+        color: var(--md-typeset-color);
+        background-color: var(--md-typeset-code-color);
+    }
+
+    .md-typeset .blogging-tag code {
+        border-radius: 5px;
+    }
+</style>
 <p><strong>[This blog post has time travelled.  It is from a previous blog that predates the very existence of this one.]</strong></p>
 <p>Being the Internet, I should probably attribute that to either Mark
 Twain or Abraham Lincoln (and in fact, Google and Bing give dozens of
@@ -300,6 +343,7 @@ represent.</p>
 <p>I've been playing with this a bit on a GitHub project for terrain
 generation in the Unity game engine. You can see the documentation as it
 gets written here: <a href="https://ckempke.github.io/UnityTerrainGeneration/#/">https://ckempke.github.io/UnityTerrainGeneration/#/</a></p>
+<p>[Update, a year later].  <strong>Docsify</strong> proved to be a little too "strict" in its formatting options to allow the flexibility I was looking for, so I currently use <a href="https://www.mkdocs.org">MkDocs</a>, which is a more advanced version of the same sort of markdown-&gt;HTML site generator.   In fact, you're looking at it now, since this blog is rendered with it.</p>
 
               
             </article>
