@@ -36,7 +36,8 @@ markdown_extensions:
 plugins:
     - search
     - blogging:
-        theme: card
+        theme: 
+          name: card
         dirs:
             - blog
         size: 10

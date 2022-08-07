@@ -5,7 +5,9 @@ author: Christopher Kempke
 description: Trying to make Unity's navigation AI system work for procedural environments.  
 tags: 
   - Unity
-  - Procedural Generation.
+  - procedural generation
+  - technology
+  - games
 ---
 
 # Asynchronous Runtime Navmesh Generation in Unity
