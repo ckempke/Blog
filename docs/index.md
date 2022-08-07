@@ -4,7 +4,7 @@ title: Christopher Kempke's Blog
 
 Welcome to my little corner of the Internet!
 
-I'll assume you're now of my legions of fans that have come from the Terrain Generation pages: [https://ckempke.github.io/UnityTerrainGeneration](https://ckempke.github.io/UnityTerrainGeneration) with questions like "wait, you have legions of fans?" and "how do I actually find what's new on that site, anyway?"     
+I'll assume you're one of my legions of fans that have come from the Terrain Generation pages: [https://ckempke.github.io/UnityTerrainGeneration](https://ckempke.github.io/UnityTerrainGeneration) with questions like "wait, you have legions of fans?" and "how do I actually find what's new on that site, anyway?"     
 
 You'll be ecstatic to learn that this is a much more traditional "Blog" format, with, like, dated pages and "most-recent-at-the-top" and all that cool stuff that was state of the art in the late 90's.
 

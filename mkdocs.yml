@@ -17,7 +17,8 @@ theme:
         name: Switch to light mode
 nav:
     - Home: index.md
-   
+    - Posts by Topic: tags.md
+       
 # toc adds sub-page "permalinks" to headers (address#header)
 # pymdownx.arithmatex adds mathjax/katex support for equations and such
 markdown_extensions:
@@ -35,6 +36,7 @@ markdown_extensions:
 plugins:
     - search
     - blogging:
+        theme: card
         dirs:
             - blog
         size: 10
@@ -42,7 +44,9 @@ plugins:
         show_total: true
         locale: en
         features:
-           tags: {}
+           tags:
+              index_page: tags.md
+              insert: top
         time_format: '%Y-%m-%d %H:%M:%S' # The format used to display the time
         meta_time_format: '%Y-%m-%d' # The format used to parse the time from meta
 

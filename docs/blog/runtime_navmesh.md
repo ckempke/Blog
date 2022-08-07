@@ -2,6 +2,7 @@
 title: "Asynchronous Runtime Navmesh Generation in Unity"
 date: 2022-8-3
 author: Christopher Kempke
+description: Trying to make Unity's navigation AI system work for procedural environments.  
 tags: 
   - Unity
   - Procedural Generation.
@@ -476,3 +477,4 @@ Also note that we build all the meshes, _then_ remove existing ones (if we're go
 In a nutshell, yes.  There's no stutter at all when new **NavMeshes** are being built or instantiated; I had to put Debug logging in or keep the scene window open even to know when it happened.   Was it worth all that effort?  Also, yes; being able to build at runtime without destroying the frame rate makes possible scenarios that otherwise wouldn't be, even if the "wait" for the **NavMesh** to become available isn't ideal.
 
 For small **NavMeshes** (a simple dungeon level, basement, maybe even a small village or house), this may very well be usable even several times a second (it can't be _every frame_ because of the `yield returns`).   And for much larger or more complex meshes, it at least makes building them _possible_.
+
