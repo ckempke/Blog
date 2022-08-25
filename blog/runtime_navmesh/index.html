@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://ckempke.github.io/Blog/blog/runtime_navmesh/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.1">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.69437709.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
@@ -44,7 +44,7 @@
     
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -511,7 +511,7 @@
 <li>The "test" position, probably the location of your gameObject itself.</li>
 <li>An <em>out</em> parameter of type NavMeshHit to hold the valid point (if any)</li>
 <li>The greatest distance to look.   The manual suggests that this should be limited to twice the height  of the agent or else the test starts getting expensive, so "8f" may well not be the right value for you.  That said, I suspect that "twice the height" is a typo, and they mean "twice the radius," since I don't understand how height would have anything to do with it.</li>
-<li>An "area mask" for what part of the NavMesh you want to look at.   "1" here is the area mask for "Walkable", which is often what you want.  Alternatively, "0xFFFF" (or better, the constant <code>NavMesh.AllAreas</code> ) will give you an area mask with all bits set, which will find allow you to find valid jump points, high-cost walking areas, etc.   If your NavMesh has a complex mix of areas, you can be as specific as you want.   Look up the area number in the Navigation window, and left-shift "1" that many times to set a bit in the mask.  (For example, if you want area "3", you'd use <code>1&lt;&lt;3</code>.  If you want area "3" and area "0", use <code>1&lt;&lt;3 | 1&lt;&lt;0</code>, and so on.   You may have encountered this before with layer masks, which work the same way.)</li>
+<li>An "area mask" for what part of the NavMesh you want to look at.   "1" here is the area mask for "Walkable", which is often what you want.  Alternatively, "0xFFFF" (or better, the constant <code>NavMesh.AllAreas</code> ) will give you an area mask with all bits set, which will find allow you to find valid jump points, high-cost walking areas, etc.   If your NavMesh has a complex mix of areas, you can be as specific as you want.   Look up the area number in the Navigation window, and left-shift "1" that many times to set a bit in the mask.  (For example, if you want area "3", you'd use <code>1&lt;&lt;3</code>.  If you want area "3" and area "0", use <code>1&lt;&lt;3 | 1&lt;&lt;0</code>, and so on.   You may have encountered this before with layer masks, which work the same way.)</li>
 </ul>
 <p>If <code>SamplePosition</code> returns false, you're out of luck.  If you are placing your "monsters" randomly, this one's likely in a position that's not walkable or reachable, outside the NavMesh area, or there's no current NavMesh at all.   You'll need to determine what to do about it.  If this is an initial random placement, try placing somewhere else.   There's an example in the <a href="https://docs.unity3d.com/ScriptReference/AI.NavMesh.SamplePosition.html">documentation for SamplePosition</a> that shows how to use it to find a random point on a mesh, although it's a little, uh, "hit or miss," if you'll excuse the pun.</p>
 <p>But let's say that SamplePosition has returned <em>true</em>, and now we've got a shiny valid position in <code>hit.position</code>.   We can just set our <code>transform.position = hit.position</code> and we're off, right?  Right?</p>
@@ -569,7 +569,10 @@
 <div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="p">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;FirstLayer&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="p">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;SecondLayer&quot;</span><span class="p">));</span><span class="w"></span>
 </code></pre></div>
 <p>And so on.   You could use 0xFFFF to set all bits, but that's likely to get you some pretty weird layers, and it's fragile in the face of third-party assets that often add layers.   Better to specify them exactly.</p>
-<p>Programmer Note:  You'll often see "+" used instead of "|" to combine masks like this.   That's fine, <em>so long as there are no duplicate values in the mask</em>.  If there are, addition will get you the wrong answer.</p>
+<blockquote>
+<p>Programmer Note:  You'll often see "+" used instead of "|" to combine masks like this.   That's fine, <em>so long as there are no duplicate values in the mask</em>.  If there are, addition will get you the wrong answer.
+</p>
+</blockquote>
 <p>Next up, we decide whether we want to collect render surfaces or collider ones.   Typically, we think of a <strong>NavMesh</strong> as avoiding things we want to not collide with, so usually <code>NavMeshCollectGeometry.PhysicsColliders</code> is the right answer.</p>
 <p>The next two parameters to our collection function are the default area type (0 for "walkable") and a list of <strong>NavMeshBuildMarkup</strong> objects.     These are what college professors often refer to as "left for the interested reader to discover."   They allow you to build meshes with non-uniform surfaces in them (for example, hard ground and soft mud), but we'll just assume it's all uniform, and pass "0" and an empty list for these two.</p>
 <p>Finally, we pass an empty list of <strong>NavMeshBuildSources</strong>, and the function will fill them in for us.</p>
@@ -614,7 +617,7 @@
 </code></pre></div>
 <p>This will verify that various of the parameters in each Agent Type's build settings are compatible; typically "Step Size" and "Maximum Slope" are the ones most likely to conflict.   These don't necessarily make the <strong>NavMesh</strong> unusable, but you'll get some weird <strong>NavMeshAgent</strong> behaviors if you just ignore the warnings.   The warning will tell you exactly what parameters are incompatible and what values will make them compatible.</p>
 <h3 id="build-the-navmeshdata">Build the NavMeshData<a class="headerlink" href="#build-the-navmeshdata" title="Permanent link">&para;</a></h3>
-<p>Now that we've got all that, we need to use it to build the actual <strong>NavMeshData</strong>.   For that, we call <code>NavMeshBuilder.BuildNavMeshData</code>  <em>for each Agent Type</em>:</p>
+<p>Now that we've got all that, we need to use it to build the actual <strong>NavMeshData</strong>.   For that, we call <code>NavMeshBuilder.BuildNavMeshData</code>  <em>for each Agent Type</em>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">NavMeshData</span><span class="w"> </span><span class="n">newData</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">BuildNavMeshData</span><span class="p">(</span><span class="w"></span>
 <span class="w">   </span><span class="n">bSettings</span><span class="p">,</span><span class="w"></span>
 <span class="w">   </span><span class="n">buildSources</span><span class="p">,</span><span class="w"></span>
@@ -639,7 +642,7 @@
 <p>OK, <em>maybe</em> we're done.   Does your game have discrete levels with loading screens or other natural breaks between them?   Then the code above should work fine for you.   The fact that the <strong>NavMesh</strong> takes a fairly long time to generate can be "hidden" in the level transition, even an extra second might not be a dealbreaker.</p>
 <p>But how 'bout that floating origin system we were talking about, above—or a game where deformation of the levels (explosions taking out walls, collapsing floors, sliding walls, portcullises, or whatever) can invalidate the <strong>NavMesh</strong> during play, requiring us to rebuild one.</p>
 <p>Well, the above code might still work for you.  It depends on the complexity (and raw size) of your level, and the frame rate you want to maintain.  Turn-based games might still be fine.   Maybe.</p>
-<p>Let's look at some numbers.    I just used the <strong>System.Diagnostics.Stopwatch</strong> to record elapsed time markers in at various places, them printed them out after the process was complete (using Debug.Log or other printing during the process would affect the results).</p>
+<p>Let's look at some numbers.    I just used the <strong>System.Diagnostics.Stopwatch</strong> to record elapsed time markers in at various places, then printed them out after the process was complete (using <em>Debug.Log</em> or other printing during the process would affect the results).</p>
 <p>Assuming we want our game to run at 120 frames/second, that gives us a budget of 1000/120 = about 8 milliseconds per frame.   Your frame rate needs may vary.   That 8 ms is the <em>total</em> time available; not just for mesh generation, but everything else that Unity needs to do in a frame.    That's a perfect world -- it's usually OK for a frame to occasionally run long, but we need the total number of milliseconds per frame to be low, ideally single digits.</p>
 <p>So here's my results on two different machines.   The first is a first generation Apple Silicon Mac, (Mac Studio M1 "Max", if it matters), and the other on a PC with a Ryzen 7 3700 processor and an Nvidia RTX 3080 video card, so comparable, high-end systems in most respects:</p>
 <table>
@@ -691,7 +694,7 @@
 <span class="c1">// &quot;Update&quot; it from scratch.</span>
 <span class="n">AsyncOperation</span><span class="w"> </span><span class="n">buildOp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">UpdateNavMeshDataAsync</span><span class="p">(</span><span class="n">meshData</span><span class="p">,</span><span class="w"> </span><span class="n">bSettings</span><span class="p">,</span><span class="w"> </span><span class="n">buildSources</span><span class="p">,</span><span class="w"> </span><span class="n">patchBounds</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
-<p>Note that <code>UpdateNavMeshDataAsync</code> returns an <strong>AsyncOperation</strong>, one of the approximately 52,937,419 different asynchronous mechanisms in .NET (the Flaming Eye of Microsoft is also easily distracted, <em>especially</em> with developer frameworks).    Off the top of my head, I don't even remember whether this one moves the work off-thread or not; for our purposes, it doesn't really matter.</p>
+<p>Note that <code>UpdateNavMeshDataAsync</code> returns an <strong>AsyncOperation</strong>, one of the approximately 52,937,419 different asynchronous mechanisms in .NET (the Flaming Eye of Microsoft is also easily distracted, <em>especially</em> with developer frameworks).    Off the top of my head, I don't even remember whether this one moves the work off-thread or not; for our purposes, it doesn't really matter.</p>
 <h3 id="rebuild-for-asynchronicity">Rebuild for Asynchronicity<a class="headerlink" href="#rebuild-for-asynchronicity" title="Permanent link">&para;</a></h3>
 <p>So the trick here is that we're going to need to move this work to a co-routine, and re-arrange things a little bit to make it work.   It's not going to be a perfect solution; it's still going to take some time for our new <strong>NavMesh</strong> to be ready, we're just not going to interrupt the rest of the game while we wait for it.   If you're in a scenario where you can keep using the old mesh until the new one is available; you should.    If you can't (your "terrain" objects are changing position, origin, or whatever), you'll need to be prepared for there to be some time when your <strong>NavMeshAgents</strong> have no mesh to use, and do something intelligent with that time (move them in a straight line, idle them, have them stand and guard, or taunt, whatever).</p>
 <p>But in return for that bit of complexity, we should be able to easily do the actual mesh exchange in a millisecond or two, so frame rate shouldn't t be affected at all.</p>
@@ -770,7 +773,11 @@
 <p>Also note that we build all the meshes, <em>then</em> remove existing ones (if we're going to), <em>then</em> add the new ones all at once rather than as each one is built.   This minimizes the time when no mesh exists at all -- in fact, since there's no <code>yield</code> between the removal and the adds, the new mesh should be available in the very same frame as the old one goes away.  (The old <strong>NavMesh</strong> may or may not still be valid that long, but for most uses it won't matter if it hangs around while we make the new one.)</p>
 <h2 id="so-does-it-work">So does it work?<a class="headerlink" href="#so-does-it-work" title="Permanent link">&para;</a></h2>
 <p>In a nutshell, yes.  There's no stutter at all when new <strong>NavMeshes</strong> are being built or instantiated; I had to put Debug logging in or keep the scene window open even to know when it happened.   Was it worth all that effort?  Also, yes; being able to build at runtime without destroying the frame rate makes possible scenarios that otherwise wouldn't be, even if the "wait" for the <strong>NavMesh</strong> to become available isn't ideal.</p>
-<p>For small <strong>NavMeshes</strong> (a simple dungeon level, basement, maybe even a small village or house), this may very well be usable even several times a second (it can't be <em>every frame</em> because of the <code>yield returns</code>).   And for much larger or more complex meshes, it at least makes building them <em>possible</em>.</p>
+<p>For small <strong>NavMeshes</strong> (a simple dungeon level, basement, maybe even a small village or house), this may very well be usable even several times a second (it can't be <em>every frame</em> because of the <code>yield returns</code>).   And for much larger or more complex meshes, it at least makes building them <em>possible</em>.</p>
+<p>The biggest caveat is that if you're doing something like floating origins, where the terrains occasionally move about and have to be re-generated (remember NavMeshes have to be on Navigation Static objects), your NavMeshAgents have to be able to account for periods where the NavMesh "goes away" and a new one isn't available yet.   That's a pain, but it's not too horrible.</p>
+
+
+
 
               
             </article>
@@ -802,10 +809,11 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
