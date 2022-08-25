@@ -145,7 +145,7 @@ The arguments to `SamplePosition` are
 - The "test" position, probably the location of your gameObject itself.
 - An *out* parameter of type NavMeshHit to hold the valid point (if any)
 - The greatest distance to look.   The manual suggests that this should be limited to twice the height  of the agent or else the test starts getting expensive, so "8f" may well not be the right value for you.  That said, I suspect that "twice the height" is a typo, and they mean "twice the radius," since I don't understand how height would have anything to do with it.
-- An "area mask" for what part of the NavMesh you want to look at.   "1" here is the area mask for "Walkable", which is often what you want.  Alternatively, "0xFFFF" (or better, the constant `NavMesh.AllAreas` ) will give you an area mask with all bits set, which will find allow you to find valid jump points, high-cost walking areas, etc.   If your NavMesh has a complex mix of areas, you can be as specific as you want.   Look up the area number in the Navigation window, and left-shift "1" that many times to set a bit in the mask.  (For example, if you want area "3", you'd use `1<<3`.  If you want area "3" and area "0", use `1<<3 | 1<<0`, and so on.   You may have encountered this before with layer masks, which work the same way.)
+- An "area mask" for what part of the NavMesh you want to look at.   "1" here is the area mask for "Walkable", which is often what you want.  Alternatively, "0xFFFF" (or better, the constant `NavMesh.AllAreas` ) will give you an area mask with all bits set, which will find allow you to find valid jump points, high-cost walking areas, etc.   If your NavMesh has a complex mix of areas, you can be as specific as you want.   Look up the area number in the Navigation window, and left-shift "1" that many times to set a bit in the mask.  (For example, if you want area "3", you'd use `1<<3`.  If you want area "3" and area "0", use `1<<3 | 1<<0`, and so on.   You may have encountered this before with layer masks, which work the same way.)
 
 If `SamplePosition` returns false, you're out of luck.  If you are placing your "monsters" randomly, this one's likely in a position that's not walkable or reachable, outside the NavMesh area, or there's no current NavMesh at all.   You'll need to determine what to do about it.  If this is an initial random placement, try placing somewhere else.   There's an example in the [documentation for SamplePosition](https://docs.unity3d.com/ScriptReference/AI.NavMesh.SamplePosition.html) that shows how to use it to find a random point on a mesh, although it's a little, uh, "hit or miss," if you'll excuse the pun.
 
@@ -234,7 +234,8 @@ int mask = (1 << LayerMask.NameToLayer("FirstLayer")) | (1 << LayerMask.NameToLa
 
 And so on.   You could use 0xFFFF to set all bits, but that's likely to get you some pretty weird layers, and it's fragile in the face of third-party assets that often add layers.   Better to specify them exactly.
 
-Programmer Note:  You'll often see "+" used instead of "|" to combine masks like this.   That's fine, _so long as there are no duplicate values in the mask_.  If there are, addition will get you the wrong answer.
+> Programmer Note:  You'll often see "+" used instead of "|" to combine masks like this.   That's fine, _so long as there are no duplicate values in the mask_.  If there are, addition will get you the wrong answer.
+>
 
 Next up, we decide whether we want to collect render surfaces or collider ones.   Typically, we think of a **NavMesh** as avoiding things we want to not collide with, so usually `NavMeshCollectGeometry.PhysicsColliders` is the right answer.
 
@@ -297,7 +298,7 @@ This will verify that various of the parameters in each Agent Type's build setti
 
 ### Build the NavMeshData
 
-Now that we've got all that, we need to use it to build the actual **NavMeshData**.   For that, we call `NavMeshBuilder.BuildNavMeshData`  _for each Agent Type_:
+Now that we've got all that, we need to use it to build the actual **NavMeshData**.   For that, we call `NavMeshBuilder.BuildNavMeshData`  _for each Agent Type_:
 
 ```c#
 NavMeshData newData = NavMeshBuilder.BuildNavMeshData(
@@ -341,7 +342,7 @@ But how 'bout that floating origin system we were talking about, above—or a ga
 
 Well, the above code might still work for you.  It depends on the complexity (and raw size) of your level, and the frame rate you want to maintain.  Turn-based games might still be fine.   Maybe.
 
-Let's look at some numbers.    I just used the **System.Diagnostics.Stopwatch** to record elapsed time markers in at various places, them printed them out after the process was complete (using Debug.Log or other printing during the process would affect the results).
+Let's look at some numbers.    I just used the **System.Diagnostics.Stopwatch** to record elapsed time markers in at various places, then printed them out after the process was complete (using *Debug.Log* or other printing during the process would affect the results).
 
 Assuming we want our game to run at 120 frames/second, that gives us a budget of 1000/120 = about 8 milliseconds per frame.   Your frame rate needs may vary.   That 8 ms is the _total_ time available; not just for mesh generation, but everything else that Unity needs to do in a frame.    That's a perfect world -- it's usually OK for a frame to occasionally run long, but we need the total number of milliseconds per frame to be low, ideally single digits.
 
@@ -382,7 +383,7 @@ NavMeshData meshData = new NavMeshData();
 AsyncOperation buildOp = NavMeshBuilder.UpdateNavMeshDataAsync(meshData, bSettings, buildSources, patchBounds);
 ```
 
-Note that `UpdateNavMeshDataAsync` returns an **AsyncOperation**, one of the approximately 52,937,419 different asynchronous mechanisms in .NET (the Flaming Eye of Microsoft is also easily distracted, _especially_ with developer frameworks).    Off the top of my head, I don't even remember whether this one moves the work off-thread or not; for our purposes, it doesn't really matter.
+Note that `UpdateNavMeshDataAsync` returns an **AsyncOperation**, one of the approximately 52,937,419 different asynchronous mechanisms in .NET (the Flaming Eye of Microsoft is also easily distracted, _especially_ with developer frameworks).    Off the top of my head, I don't even remember whether this one moves the work off-thread or not; for our purposes, it doesn't really matter.
 
 ### Rebuild for Asynchronicity
 
@@ -478,5 +479,7 @@ Also note that we build all the meshes, _then_ remove existing ones (if we're go
 
 In a nutshell, yes.  There's no stutter at all when new **NavMeshes** are being built or instantiated; I had to put Debug logging in or keep the scene window open even to know when it happened.   Was it worth all that effort?  Also, yes; being able to build at runtime without destroying the frame rate makes possible scenarios that otherwise wouldn't be, even if the "wait" for the **NavMesh** to become available isn't ideal.
 
-For small **NavMeshes** (a simple dungeon level, basement, maybe even a small village or house), this may very well be usable even several times a second (it can't be _every frame_ because of the `yield returns`).   And for much larger or more complex meshes, it at least makes building them _possible_.
+For small **NavMeshes** (a simple dungeon level, basement, maybe even a small village or house), this may very well be usable even several times a second (it can't be _every frame_ because of the `yield returns`).   And for much larger or more complex meshes, it at least makes building them _possible_.
+
+The biggest caveat is that if you're doing something like floating origins, where the terrains occasionally move about and have to be re-generated (remember NavMeshes have to be on Navigation Static objects), your NavMeshAgents have to be able to account for periods where the NavMesh "goes away" and a new one isn't available yet.   That's a pain, but it's not too horrible.
 
