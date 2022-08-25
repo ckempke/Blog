@@ -20,13 +20,13 @@ I'm Chris Kempke.  Over my 30-year career, I've worked for a few consulting comp
 
 Now retired, I've been spending my time writing (both fiction and not), and learning some of those technologies I didn't have time for in my working life.    I still have too many hobbies, and occasionally do a little consulting to keep my hand in.
 
-A lot of my time these days is spent in Unity (the 3D game engine), mostly trying to make it do things that it doesn't want to do.   I tend to write about those, too; I haven't yet made the jump to video like all the "cool kids" are doing these days.
+A lot of my time these days is spent in Unity (the 3D game engine), mostly trying to make it do things that it doesn't want to do.   I tend to write about those, too; I haven't yet made the jump to video like all the "cool kids" are doing these days.
 
 My blogging software is adapted from a system more intended for documentation; it does not have a "comments" section, as you can probably tell by the lack of off-topic badly-written political rants.   But if you have comments, you can e-mail them to me at my gmail.com address of "Christopher.kempke" and maybe I'll add constructive comments here, manually.
 
 My own little rant is that I'm not a fan of most of the large social media apps:  I blame their algorithmic, engagement-driven but truth-independent "filtering" for a society in which there seems to be no conspiracy or information so obviously, ridiculously, over-the-top-obviously false that about a third of supposedly rational adults won't _still_ somehow believe it.    So now that I have no need to integrate with these things for work, I don't.  I have no (active, anyway) accounts on Facebook, Twitter, Instagram, TikTok, etc.
 
-I do maintain a presence on LinkedIn, primarily because it amuses me how their algorithms _don't_ handle "Retired" as a status, and keep recommending to me hundreds of people a "my company: Retired" as close network associates.    But if you need a temporary, part-time employee for a technical or documentation project, feel free to reach out to me.  I might be interested.
+I do maintain a presence on LinkedIn, primarily because it amuses me how their algorithms _don't_ handle "Retired" as a status, and keep recommending to me hundreds of people at "my company: Retired" as close network associates.    But if you need a temporary, part-time employee for a technical or documentation project, feel free to reach out to me.  I might be interested.
 
 ## About this Site
 
