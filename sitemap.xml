@@ -2,37 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://ckempke.github.io/Blog/</loc>
-         <lastmod>2022-08-25</lastmod>
+         <lastmod>2022-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ckempke.github.io/Blog/tags/</loc>
-         <lastmod>2022-08-25</lastmod>
+         <lastmod>2022-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ckempke.github.io/Blog/blog/1-AUG-2022/</loc>
-         <lastmod>2022-08-25</lastmod>
+         <lastmod>2022-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ckempke.github.io/Blog/blog/7-JULY-2021/</loc>
-         <lastmod>2022-08-25</lastmod>
+         <lastmod>2022-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ckempke.github.io/Blog/blog/8-DEC-2021/</loc>
-         <lastmod>2022-08-25</lastmod>
+         <lastmod>2022-09-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ckempke.github.io/Blog/blog/ai-generated-art/</loc>
+         <lastmod>2022-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ckempke.github.io/Blog/blog/procedural-language/</loc>
-         <lastmod>2022-08-25</lastmod>
+         <lastmod>2022-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ckempke.github.io/Blog/blog/runtime_navmesh/</loc>
-         <lastmod>2022-08-25</lastmod>
+         <lastmod>2022-09-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://ckempke.github.io/Blog/blog/procedural-language/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.1">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.3">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.69437709.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6b80c2a2.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
@@ -475,7 +475,7 @@
 <span class="w">        </span><span class="p">};</span><span class="w"></span>
 </code></pre></div>
 <p>This is C#, because the implementation is going to be in Unity, but the language doesn't matter much.   That's 35 syllables right there, and even using just that, we can get pleasant-sounding nonsense like ""noulmima na om olloully" or "emmuno lo nyhymu ynny."     The regularity of the 2-character syllables produces a sort of artificial-looking regularity to the generated text, but we can work with that.</p>
-<p>A different set of syllables, heavy on sibilants (S, soft C) and hard consonants (K, P, T):</p>
+<p>A different set of syllables, heavy on sibilants (S, soft C) and hard consonants (K, P, T): </p>
 <div class="highlight"><pre><span></span><code><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span><span class="w"> </span><span class="n">hardSyllables</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;()</span><span class="w"></span>
 <span class="w">        </span><span class="p">{</span><span class="w"></span>
 <span class="w">          </span><span class="s">&quot;ka&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ke&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ku&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ki&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ko&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ky&quot;</span><span class="p">,</span><span class="w"></span>
@@ -700,7 +700,7 @@
 <span class="n">Debug</span><span class="p">.</span><span class="n">Assert</span><span class="p">(</span><span class="n">syllablesAvailable</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="p">*</span><span class="w"> </span><span class="m">1.5f</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="s">$&quot;ASSERT: We&#39;re looking for {number} syllables out of {syllablesAvailable}, which will likely take a long time.&quot;</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
-<p>This will check (in debug builds) that we've got at least 150% of the number of syllables that we're asking for.    That doesn't actually <em>fix</em> the problem, but it should make us aware of it.</p>
+<p>This will check (in debug builds) that we've got at least 150% of the number of syllables that we're asking for.    That doesn't actually <em>fix</em> the problem, but it should make us aware of it.</p>
 <p>An easier case is <code>SyllableCount()</code>, which just used that <code>percentSyllableCountChance</code> array to choose the a number of syllables according to the provided probability distribution:</p>
 <div class="highlight"><pre><span></span><code><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">SyllableCount</span><span class="p">()</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
@@ -881,7 +881,7 @@
 <span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">outString</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 </code></pre></div>
-<p>The use of <code>char.IsLetter()</code> means that numbers/digits are considered punctuation.   If you don't want that, you can either use <code>IsLetterOrDigit()</code> or just write out your numbers rather than using digits.</p>
+<p>The use of <code>char.IsLetter()</code> means that numbers/digits are considered punctuation.   If you don't want that, you can either use <code>IsLetterOrDigit()</code> or just write out your numbers rather than using digits.</p>
 <h3 id="partial-translations">Partial translations<a class="headerlink" href="#partial-translations" title="Permanent link">&para;</a></h3>
 <p>The "translation" mechanism in <em>No Man's Sky</em> works by printing out the synthetic text, but with "known" words replaced by their real language equivalent:  "Blah blahh, bblah cucumber bbllaahh mauve," or suchlike.   </p>
 <p>There are two mechanism for "knowing" a word.   The player can actually learn them by various means ("knowledge stones" on planet surfaces, speaking with aliens, alien monuments, etc.).   Those are permanently learned and will always translate once known.     The second mechanism are "machine translators," which translate a small number of "additional" words on a translation-by-translation basis.   These words are translated for the current interaction, but become unknown again afterward.</p>
@@ -1600,7 +1600,7 @@ Random Language
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
+      <script src="../../assets/javascripts/bundle.2ab50757.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
