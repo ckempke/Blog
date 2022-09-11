@@ -10,6 +10,8 @@ tags:
 
 # Artists aren't doomed, quite yet
 
+## So, computers can do art, now?
+
 ![Kitten in the style of Vincent van Gogh (example 1)](blogmedia/ai-kitten1.jpeg)
 
 In the last few weeks, mainstream news has started covering synthetic art generation systems—Artificial Intelligence systems that can "learn" about various art techniques, artists, forms, subjects, and the like, then generate new, original creations based on either a provided "starter" image or, more interestingly, a simple text prompt.     The general public awareness of this was probably prompted by a story about an AI-generated artwork winning an art competition; more technical sources have been talking about these AIs for several months now.
@@ -80,7 +82,7 @@ And even when you do, I'm uncertain as to the level of originality being present
 
 ![Card1](blogmedia/c1.jpeg){width=256}![Card2](blogmedia/c2.jpeg){width=256}![Card3](blogmedia/c3.jpeg){width=256}![Card4](blogmedia/c4.jpeg){width=256}![Card5](blogmedia/c5.jpeg){width=256}
 
-![Card6](blogmedia/c6.jpeg){width=256}![Card7](blogmedia/c7.jpeg){width=256}![Card8](blogmedia/c8.jpeg){width=256}[Card9](blogmedia/c9.jpeg){width=256}![Card10](blogmedia/c10.jpeg){width=256}
+![Card6](blogmedia/c6.jpeg){width=256}![Card7](blogmedia/c7.jpeg){width=256}![Card8](blogmedia/c8.jpeg){width=256}![Card9](blogmedia/c9.jpeg){width=256}![Card10](blogmedia/c10.jpeg){width=256}
 
 Those are based on collector cards from Magic the Gathering or some similar collectable card game, so close to the originals that individual words and numbers are sometimes legible in them.   And they made up about eight percent of my output.
 
