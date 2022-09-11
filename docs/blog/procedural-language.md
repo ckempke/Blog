@@ -85,7 +85,7 @@ private readonly static List<string> softSyllables = new List<string>()
 
 This is C#, because the implementation is going to be in Unity, but the language doesn't matter much.   That's 35 syllables right there, and even using just that, we can get pleasant-sounding nonsense like ""noulmima na om olloully" or "emmuno lo nyhymu ynny."     The regularity of the 2-character syllables produces a sort of artificial-looking regularity to the generated text, but we can work with that.
 
-A different set of syllables, heavy on sibilants (S, soft C) and hard consonants (K, P, T):
+A different set of syllables, heavy on sibilants (S, soft C) and hard consonants (K, P, T): 
 
 ```C#
 private readonly static List<string> hardSyllables = new List<string>()
@@ -160,7 +160,6 @@ So we'll define a couple of "categories" here that categorize the language more 
         MEDIUM,
         COMPLEX,
     }
-
 ```
 
 In both cases, we have a `.RANDOM` value that we can use if the developer doesn't want to think about it.
@@ -366,7 +365,7 @@ Debug.Assert(syllablesAvailable > number * 1.5f,
 
 ```
 
-This will check (in debug builds) that we've got at least 150% of the number of syllables that we're asking for.    That doesn't actually _fix_ the problem, but it should make us aware of it.
+This will check (in debug builds) that we've got at least 150% of the number of syllables that we're asking for.    That doesn't actually _fix_ the problem, but it should make us aware of it.
 
 An easier case is `SyllableCount()`, which just used that `percentSyllableCountChance` array to choose the a number of syllables according to the provided probability distribution:
 
@@ -397,7 +396,7 @@ private int SyllableCount()
     {
         chanceSum += chance;
     }
-
+  
     int num = UnityEngine.Random.Range(0, chanceSum);
     int outNum = 0;
     while (num > percentSyllableCountChance[outNum])
@@ -585,7 +584,7 @@ public string GenerateTextFor(string baseLanguageText)
   }
 ```
 
-The use of `char.IsLetter()` means that numbers/digits are considered punctuation.   If you don't want that, you can either use `IsLetterOrDigit()` or just write out your numbers rather than using digits.
+The use of `char.IsLetter()` means that numbers/digits are considered punctuation.   If you don't want that, you can either use `IsLetterOrDigit()` or just write out your numbers rather than using digits.
 
 ### Partial translations
 
