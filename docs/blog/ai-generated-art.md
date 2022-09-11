@@ -30,7 +30,7 @@ Which is kinda slick, but you might also get THIS one:
 
 ![Kitten in the style of Vincent van Gogh (example 1)](blogmedia/ai-kitten3.jpeg)
 
-That's pretty much just a photo of a kitten pasted over a vaguely van Gogh background.
+That's pretty much just a photo of a kitten pasted over a van Gogh background.
 
 Reaction among artists ranged from amusement to alarm, with many foretelling the end of human artists altogether.  (This was also predicted at the invention of the camera, digital cameras, television, video, photoshop, the printing press, and probably most other inventions throughout history).
 
@@ -62,7 +62,7 @@ Let's add a "a dragon resting" to our ice cave:
 
 ![Dragon in a frozen cave](blogmedia/f-dragon.jpeg)
 
-Don't look too closely, and that image passes pretty well, too.   Although the dragon has a weird body shape, as well.  We'll come back to dragons, later.
+Don't look too closely, and that image passes pretty well, too.   Although the dragon has a weird body shape.  We'll come back to dragons, later.
 
 I am, apparently, not using very good prompts for most of these.    There's an, ah, "art" to crafting good prompts, and you'll find references online that can give you help.    One reference I used while installing Stable Diffusion suggests this as a test prompt:
 
@@ -84,15 +84,15 @@ And even when you do, I'm uncertain as to the level of originality being present
 
 ![Card6](blogmedia/c6.jpeg){width=256}![Card7](blogmedia/c7.jpeg){width=256}![Card8](blogmedia/c8.jpeg){width=256}![Card9](blogmedia/c9.jpeg){width=256}![Card10](blogmedia/c10.jpeg){width=256}
 
-Those are based on collector cards from Magic the Gathering or some similar collectable card game, so close to the originals that individual words and numbers are sometimes legible in them.   And they made up about eight percent of my output.
+Those are based on collector cards from Magic the Gathering or some similar collectable card game, so close to the originals that individual words and numbers are sometimes legible in them.   And they made up about eight percent of my output.?
 
 There are a couple possibilities, here.   
 
 - (A) For each of those "synthesized" images, a single, specific source made up the bulk of the image.  In other words, less of "image synthesis,"
   more of "some sort of hallucinogenic search engine."    
-- (B) These card formats are so distinctive in style that they effectively make up an "art style" of their own, and these actually _are_ more or less completely original images, just presented in a "MTG Card" style while will have future art historians writing dissertations about the importance of saving throws in mis-21st-century discourse.
+- (B) These card formats are so distinctive in style that they effectively make up an "art style" of their own, and these actually _are_ more or less completely original images, just presented in a "MTG Card" style which will have future art historians writing dissertations about the importance of saving throws in mid-21st-century discourse.
 
-That's a big difference, and which of those possibilities is its can be important.   In part, this is because of a quirk of copyright law:  images not produced by humans are in the public domain.  But if you can just "use an AI" to copy something and magically turn it into public domain art, it's unlikely that rights holders will allow that state will persist long. 
+That's a big difference, and it might be important to know which is it.   In part, this is because of a quirk of copyright law:  images not produced by humans are in the public domain.  But if you can just "use an AI" to copy something and magically turn it into public domain art, it's unlikely that rights holders will allow that state will persist long. 
 
 So, which is it? Short answer:  I don't know.   Given the vagaries of how these sorts of machine learning models work, it's possible that nobody knows.    Machine Learning doesn't always give you good explanations for "why did you choose this answer?"  (Although they can: consider the "Why are you showing me this?" button on many recommendation engines.)
 
