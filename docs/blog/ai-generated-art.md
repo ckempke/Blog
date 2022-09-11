@@ -22,7 +22,7 @@ Whichever of the sources you use, they work in similar ways.  They're fed a mass
 
 Need a kitten in the style of Vincent van Gogh?  You might get the image at the top, or maybe this one:
 
-<img src="blogmedia/ai-kitten2.jpeg" alt="Kitten in the style of Vincent van Gogh (example 1)" style="zoom:200%;" />
+![Another van Gogh Kitten](blogmedia/ai-kitten2.jpeg)
 
 Which is kinda slick, but you might also get THIS one:
 
@@ -78,9 +78,9 @@ And right now, that seems to be the state of AI image generation.   Far from rep
 
 And even when you do, I'm uncertain as to the level of originality being presented.   For example, back to the dragons.    When fed some prompts of the "a dragon in (place) ..." for several different places, I got about 200 images, which contained all of these:
 
-<img src="blogmedia/c1.jpeg" alt="Card1" style="zoom:25%;" /><img src="blogmedia/c2.jpeg" alt="Card2" style="zoom:25%;" /><img src="blogmedia/c3.jpeg" alt="Card3" style="zoom:25%;" /><img src="blogmedia/c4.jpeg" alt="Card4" style="zoom:25%;" /><img src="blogmedia/c5.jpeg" alt="Card5" style="zoom:25%;" /><img src="blogmedia/c6.jpeg" alt="Card6" style="zoom:25%;" />
+![Card1](blogmedia/c1.jpeg){width=128}![Card2](blogmedia/c2.jpeg)![Card3](blogmedia/c3.jpeg)![Card4](blogmedia/c4.jpeg)![Card5](blogmedia/c5.jpeg)
 
-<img src="blogmedia/c7.jpeg" alt="Card7" style="zoom:25%;" /><img src="blogmedia/c8.jpeg" alt="Card8" style="zoom:25%;" /><img src="blogmedia/c9.jpeg" alt="Card9" style="zoom:25%;" /><img src="blogmedia/c10.jpeg" alt="Card10" style="zoom:25%;" />
+![Card6](blogmedia/c6.jpeg)![Card7](blogmedia/c7.jpeg)![Card8](blogmedia/c8.jpeg)![Card9](blogmedia/c9.jpeg)![Card10](blogmedia/c10.jpeg)
 
 Those are based on collector cards from Magic the Gathering or some similar collectable card game, so close to the originals that individual words and numbers are sometimes legible in them.   And they made up about eight percent of my output.
 
