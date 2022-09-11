@@ -78,9 +78,9 @@ And right now, that seems to be the state of AI image generation.   Far from rep
 
 And even when you do, I'm uncertain as to the level of originality being presented.   For example, back to the dragons.    When fed some prompts of the "a dragon in (place) ..." for several different places, I got about 200 images, which contained all of these:
 
-![Card1](blogmedia/c1.jpeg){width=128}![Card2](blogmedia/c2.jpeg)![Card3](blogmedia/c3.jpeg)![Card4](blogmedia/c4.jpeg)![Card5](blogmedia/c5.jpeg)
+![Card1](blogmedia/c1.jpeg){width=256}![Card2](blogmedia/c2.jpeg){width=256}![Card3](blogmedia/c3.jpeg){width=256}![Card4](blogmedia/c4.jpeg){width=256}![Card5](blogmedia/c5.jpeg){width=256}
 
-![Card6](blogmedia/c6.jpeg)![Card7](blogmedia/c7.jpeg)![Card8](blogmedia/c8.jpeg)![Card9](blogmedia/c9.jpeg)![Card10](blogmedia/c10.jpeg)
+![Card6](blogmedia/c6.jpeg){width=256}![Card7](blogmedia/c7.jpeg){width=256}![Card8](blogmedia/c8.jpeg){width=256}[Card9](blogmedia/c9.jpeg){width=256}![Card10](blogmedia/c10.jpeg){width=256}
 
 Those are based on collector cards from Magic the Gathering or some similar collectable card game, so close to the originals that individual words and numbers are sometimes legible in them.   And they made up about eight percent of my output.
 
