@@ -84,7 +84,7 @@ And even when you do, I'm uncertain as to the level of originality being present
 
 ![Card6](blogmedia/c6.jpeg){width=256}![Card7](blogmedia/c7.jpeg){width=256}![Card8](blogmedia/c8.jpeg){width=256}![Card9](blogmedia/c9.jpeg){width=256}![Card10](blogmedia/c10.jpeg){width=256}
 
-Those are based on collector cards from Magic the Gathering or some similar collectable card game, so close to the originals that individual words and numbers are sometimes legible in them.   And they made up about eight percent of my output.?
+Those are based on collector cards from Magic the Gathering or some similar collectable card game, so close to the originals that individual words and numbers are sometimes legible in them.   And they made up about eight percent of my output.
 
 There are a couple possibilities, here.   
 
