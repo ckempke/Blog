@@ -90,7 +90,7 @@ _navMeshAgent.isStopped = false;
 
 (You also need the usual stuff like making sure the component is enabled and active.)
 
-At this point, one of two things will happen:  The agent will start to move the gameObject toward the destination (it controls facing and movement, things like animation are up to you), or you'll start getting tons of error messages about "<Various Functions> can only be called on an active agent that has been placed on a NavMesh."
+At this point, one of two things will happen:  The agent will start to move the gameObject toward the destination (it controls facing and movement, things like animation are up to you), or you'll start getting tons of error messages about "\<Various Functions\> can only be called on an active agent that has been placed on a NavMesh."
 
 Let's ignore the errors for a moment.   Assuming your agent is moving your gameObject, you can then use the `remainingDistance` property on the NavMeshAgent to figure out how far the agent is from its destination (say, to give it another waypoint on a patrol route.).   There are two caveats with `remainingDistance`:
 
@@ -115,7 +115,7 @@ The capsule collider thing may be true.  Some of the others might work, too, but
 
 There first thing to check is `_navMeshAgent.isActiveAndEnabled`.  If that returns false, either the gameObject has been set to inactive or the **NavMeshAgent** component on it is disabled.   These are both pretty standard checks for weird Unity behaviors.
 
-Next up, we can actually test if the agent is "really" on a mesh by asking it.   `_navMeshAgent.isOnNavMesh` returns *true*, then the agent is properly placed on a **NavMesh** compatible with its agent.   In this case, you should be good to go, and you won't get the "active agent..." errors for that particular game object.
+Next up, we can actually test if the agent is "really" on a mesh by asking it.  If  `_navMeshAgent.isOnNavMesh` returns *true*, then the agent is properly placed on a **NavMesh** compatible with its agent.   In this case, you should be good to go, and you won't get the "active agent..." errors for that particular game object.
 
 But what if `isOnNavMesh` returns *false*?
 
@@ -123,7 +123,7 @@ First off, verify that the Agent Type selected for the agent is compatible with 
 
 Otherwise, we should be able to fix it.
 
-There's two pieces of "magic sauce" here.   One of them its the `NavMesh.SamplePosition` function.  Note that this is a class ("static" ) function on NavMesh.   All of NavMesh's user-accessible functions are static; which means—among other things—that our options for moving it off-thread will be limited, later.
+There's two pieces of "magic sauce" here.   One of them its the `NavMesh.SamplePosition` function.  Note that this is a class ("static") function on NavMesh.   All of NavMesh's user-accessible functions are static; which means—among other things—that our options for moving it off-thread will be limited, later.
 
 `SamplePosition`() works a lot like `Physics.Raycast()`.  It takes a starting position, tries to find the nearest NavMesh point from it, and returns that value if it works.
 
