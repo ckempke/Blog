@@ -264,7 +264,7 @@ NavMeshBuilder.CollectSources(
             buildSources);
 ```
 
-There's an alternate form of `CollectSources` that takes a **GameObject** as the first parameter (instead of the bounds) and builds only from that object and it's children.   Depending on how your game objects are structured in the hierarchy, one of the other will likely be easiest for you.
+There's an alternate form of `CollectSources` that takes a **GameObject** as the first parameter (instead of the bounds) and builds only from that object and its children.   Depending on how your game objects are structured in the hierarchy, one of the other will likely be easiest for you.
 
 ### Get the Build Settings for each Agent Type
 
@@ -338,7 +338,7 @@ That's it!   We've successfully made a **NavMesh** at runtime.   We're done!
 
 OK, _maybe_ we're done.   Does your game have discrete levels with loading screens or other natural breaks between them?   Then the code above should work fine for you.   The fact that the **NavMesh** takes a fairly long time to generate can be "hidden" in the level transition, even an extra second might not be a dealbreaker.
 
-But how 'bout that floating origin system we were talking about, above—or a game where deformation of the levels (explosions taking out walls, collapsing floors, sliding walls, portcullises, or whatever) can invalidate the **NavMesh** during play, requiring us to rebuild one.
+But how 'bout that floating origin system we were talking about, above—or a game where deformation of the levels (explosions taking out walls, collapsing floors, sliding walls, portcullises, or whatever) can invalidate the **NavMesh** during play, requiring us to rebuild one?
 
 Well, the above code might still work for you.  It depends on the complexity (and raw size) of your level, and the frame rate you want to maintain.  Turn-based games might still be fine.   Maybe.
 
@@ -387,7 +387,7 @@ Note that `UpdateNavMeshDataAsync` returns an **AsyncOperation**, one of the app
 
 ### Rebuild for Asynchronicity
 
-So the trick here is that we're going to need to move this work to a co-routine, and re-arrange things a little bit to make it work.   It's not going to be a perfect solution; it's still going to take some time for our new **NavMesh** to be ready, we're just not going to interrupt the rest of the game while we wait for it.   If you're in a scenario where you can keep using the old mesh until the new one is available; you should.    If you can't (your "terrain" objects are changing position, origin, or whatever), you'll need to be prepared for there to be some time when your **NavMeshAgents** have no mesh to use, and do something intelligent with that time (move them in a straight line, idle them, have them stand and guard, or taunt, whatever).
+So the trick here is that we're going to need to move this work to a co-routine, and re-arrange things a little bit to make it work.   It's not going to be a perfect solution; it's still going to take some time for our new **NavMesh** to be ready, we're just not going to interrupt the rest of the game while we wait for it.   If you're in a scenario where you can keep using the old mesh until the new one is available—you should.    If you can't (because your "terrain" objects are changing position, origin, or whatever), you'll need to be prepared for there to be some time when your **NavMeshAgents** have no mesh to use, and do something intelligent with that time (move them in a straight line, idle them, have them stand and guard, or taunt, whatever).
 
 But in return for that bit of complexity, we should be able to easily do the actual mesh exchange in a millisecond or two, so frame rate shouldn't t be affected at all.
 
