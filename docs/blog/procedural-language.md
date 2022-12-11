@@ -409,7 +409,7 @@ private int SyllableCount()
 }
 ```
 
-That works better—although it the chance array were empty, or if it held negative values, we could get weird effects.    We should return a reasonable default in the first case, and assert on the latter:
+That works better—although if the chance array were empty, or if it held negative values, we could get weird effects.    We should return a reasonable default in the first case, and assert on the latter:
 
 ```C#
 private int SyllableCount()
@@ -759,7 +759,7 @@ How about the rest?
 
 The first three points are going to depend on our random number generator.  The last two don't, but they're both something that's trivial for a human to check, but relatively annoying to write code for.
 
-We _could_ make the random stuff non-random by using `UnityEngine.Random.seed=42` or some other fixed number before doing them.   But we're not going to, because doing so creates a subtle dependency:  we'll only get the same outputs—even with the same seed—if the number and order of calls to the random number generator don't change.    Any tests we build based on the results of a single seed are going to be fragile:  Any change (successful or not, valid or not, minor or not) to how the algorithms use `Random` will make all our tests fail.  And then someone's going to have to spend a day figuring out WHY the tests failed, even if the code is still working perfectly.    That sort of nonsense is why I'm not a Unit Test believer.
+We _could_ make the random stuff non-random by using `UnityEngine.Random.seed=42` or some other fixed number before doing them.   But we're not going to, because doing so creates a subtle dependency:  we'll only get the same outputs—even with the same seed—*if the number and order of calls to the random number generator don't change.*    Any tests we build based on the results of a single seed are going to be fragile:  Any change (successful or not, valid or not, minor or not) to how the algorithms use `Random` will make all our tests fail.  And then someone's going to have to spend a day figuring out WHY the tests failed, even if the code is still working perfectly.    That sort of nonsense is why I'm not a Unit Test believer.
 
 But we still need the ability to verify that the code is working as intended, and honestly, we'd be better to rely on human judgement for that.
 

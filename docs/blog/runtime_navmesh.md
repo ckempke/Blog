@@ -12,6 +12,8 @@ tags:
 
 # Asynchronous Runtime Navmesh Generation in Unity
 
+**[Update: Dec, 2022].  In Unity 2022.2+, be careful of using this stuff.   They (Unity) finally integrated the NavMeshSurface code, and deprecated some of the existing NavMesh tools.    So far as I know, everything here still works, but I haven't had a chance to play with the new stuff in depth yet to see if there are "gotchas." **
+
 Buckle in, boys and girls.  This one's going to be a ride.
 
 I've recently started trying to add monsters to the world I'm creating over in my [Unity Procedural Terrain](https://ckempke.github.io/UnityTerrainGeneration) system.   I'd like to use the **NavMesh** system for enemy AI, but since my terrains aren't created in the Unity Editor, but rather randomly at runtime, I need to be able to create the **NavMeshes** for my monsters at runtime.
@@ -197,6 +199,8 @@ The result was something called "Components for Runtime NavMesh Building."   You
 This tutorial makes two claims of note:  that these would eventually become part of Unity itself (they didn't), and that they are fast enough to use at runtime, even every frame, at least on simple stuff.    That second claim is likely true for things like procedural dungeons with relatively simple structures, but it sure doesn't seem to work that fast on Terrains.
 
 You still see poor lost souls wandering the Internet trying to use these; any reference to **NavMeshSurface** is a red flag.   Back away slowly and don't make eye contact.   I've actually managed to get them working even in Unity 2021.3, but the fact that these components have been abandoned for half a decade now doesn't give us confidence in using them.
+
+> **[Update: November, 2022]:** It appears that I spoke too soon!  Unity 2022 versions appear to have NavMeshSurface built in, so apparently it _did_ finally make it to production.    That said, you'll still probably need the techniques described below for performance if your meshes are very complex.
 
 ## Using NavMeshBuilder
 
