@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://ckempke.github.io/Blog/blog/procedural-language/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.2">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.9f9400aa.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
         
       
       
@@ -118,6 +118,7 @@
         
           
           
+          
           <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
@@ -125,6 +126,7 @@
             </label>
           
         
+          
           
           
           <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
@@ -739,7 +741,7 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">outNum</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </code></pre></div>
-<p>That works better—although it the chance array were empty, or if it held negative values, we could get weird effects.    We should return a reasonable default in the first case, and assert on the latter:</p>
+<p>That works better—although if the chance array were empty, or if it held negative values, we could get weird effects.    We should return a reasonable default in the first case, and assert on the latter:</p>
 <div class="highlight"><pre><span></span><code><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">SyllableCount</span><span class="p">()</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">percentSyllableCountChance</span><span class="p">.</span><span class="n">Length</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
@@ -1031,7 +1033,7 @@ Hello, you awful countryman.
 <li>Leading capitals and punctuation except for single-quotes should be in the same relative places in the output string as it was in the input string.</li>
 </ul>
 <p>The first three points are going to depend on our random number generator.  The last two don't, but they're both something that's trivial for a human to check, but relatively annoying to write code for.</p>
-<p>We <em>could</em> make the random stuff non-random by using <code>UnityEngine.Random.seed=42</code> or some other fixed number before doing them.   But we're not going to, because doing so creates a subtle dependency:  we'll only get the same outputs—even with the same seed—if the number and order of calls to the random number generator don't change.    Any tests we build based on the results of a single seed are going to be fragile:  Any change (successful or not, valid or not, minor or not) to how the algorithms use <code>Random</code> will make all our tests fail.  And then someone's going to have to spend a day figuring out WHY the tests failed, even if the code is still working perfectly.    That sort of nonsense is why I'm not a Unit Test believer.</p>
+<p>We <em>could</em> make the random stuff non-random by using <code>UnityEngine.Random.seed=42</code> or some other fixed number before doing them.   But we're not going to, because doing so creates a subtle dependency:  we'll only get the same outputs—even with the same seed—<em>if the number and order of calls to the random number generator don't change.</em>    Any tests we build based on the results of a single seed are going to be fragile:  Any change (successful or not, valid or not, minor or not) to how the algorithms use <code>Random</code> will make all our tests fail.  And then someone's going to have to spend a day figuring out WHY the tests failed, even if the code is still working perfectly.    That sort of nonsense is why I'm not a Unit Test believer.</p>
 <p>But we still need the ability to verify that the code is working as intended, and honestly, we'd be better to rely on human judgement for that.</p>
 <p>So we'll just add a bunch of output to the end of the existing test, which will produce a "Manual Evaluation Output" section that we can just look over:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// This isn&#39;t checked as part of the test, it just generates more output </span>
@@ -1602,10 +1604,10 @@ Random Language
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.39f04ddb.min.js"></script>
+      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
@@ -1613,6 +1615,7 @@ Random Language
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
       
+    
     
   </body>
 </html>

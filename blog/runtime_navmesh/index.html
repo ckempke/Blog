@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://ckempke.github.io/Blog/blog/runtime_navmesh/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.2">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.9f9400aa.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
         
       
       
@@ -118,6 +118,7 @@
         
           
           
+          
           <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
@@ -125,6 +126,7 @@
             </label>
           
         
+          
           
           
           <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
@@ -431,6 +433,7 @@
     }
 </style>
 <h1 id="asynchronous-runtime-navmesh-generation-in-unity">Asynchronous Runtime Navmesh Generation in Unity<a class="headerlink" href="#asynchronous-runtime-navmesh-generation-in-unity" title="Permanent link">&para;</a></h1>
+<p><strong>[Update: Dec, 2022].  In Unity 2022.2+, be careful of using this stuff.   They (Unity) finally integrated the NavMeshSurface code, and deprecated some of the existing NavMesh tools.    So far as I know, everything here still works, but I haven't had a chance to play with the new stuff in depth yet to see if there are "gotchas." </strong></p>
 <p>Buckle in, boys and girls.  This one's going to be a ride.</p>
 <p>I've recently started trying to add monsters to the world I'm creating over in my <a href="https://ckempke.github.io/UnityTerrainGeneration">Unity Procedural Terrain</a> system.   I'd like to use the <strong>NavMesh</strong> system for enemy AI, but since my terrains aren't created in the Unity Editor, but rather randomly at runtime, I need to be able to create the <strong>NavMeshes</strong> for my monsters at runtime.</p>
 <p>And thus began the rabbit hole.   It became quickly obvious that <em>it could be done,</em> but equally obvious that there wasn't really a good known solution out there, particularly one that was performant enough to use in a runtime environment where terrains were being created and destroyed at a reasonably fast cadence as the player moves around a large open world.</p>
@@ -480,7 +483,7 @@
 <div class="highlight"><pre><span></span><code><span class="n">_navMeshAgent</span><span class="p">.</span><span class="n">isStopped</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span><span class="w">    </span>
 </code></pre></div>
 <p>(You also need the usual stuff like making sure the component is enabled and active.)</p>
-<p>At this point, one of two things will happen:  The agent will start to move the gameObject toward the destination (it controls facing and movement, things like animation are up to you), or you'll start getting tons of error messages about "<Various Functions> can only be called on an active agent that has been placed on a NavMesh."</p>
+<p>At this point, one of two things will happen:  The agent will start to move the gameObject toward the destination (it controls facing and movement, things like animation are up to you), or you'll start getting tons of error messages about "\&lt;Various Functions> can only be called on an active agent that has been placed on a NavMesh."</p>
 <p>Let's ignore the errors for a moment.   Assuming your agent is moving your gameObject, you can then use the <code>remainingDistance</code> property on the NavMeshAgent to figure out how far the agent is from its destination (say, to give it another waypoint on a patrol route.).   There are two caveats with <code>remainingDistance</code>:</p>
 <p>1) It will return 0 when the agent can go no farther.   This doesn't necessarily mean that it's at the destination you originally specified, just that it's as close as the NavMesh allows to that point (which could be quite far away, if you specified a someplace way off the mesh).
 2) If the agent can't move in a straight line to the destination, it tends to return <code>Infinity</code> while it traverses a path, up until the last "leg."  Once it's just on a straight-line route to it's destination, it'll start giving real numbers.</p>
@@ -493,11 +496,11 @@
 <p>As with many of these sorts of things, a sort of mythology develops, as devs find their superstitious practices that "fix" the problem:  The position needs to be exactly on the mesh.  The feet of your model need to be exactly on the mesh.    The model needs a capsule collider of exactly the mesh's agent size.   The agent needs to be disabled and then enabled again.   The "Lord of the Rings" needs to be playing on the TV while you code.</p>
 <p>The capsule collider thing may be true.  Some of the others might work, too, but especially if we're going to be moving these things at runtime on <strong>NavMeshes</strong> that come and go, we need to have a more reliable way of  insuring it.</p>
 <p>There first thing to check is <code>_navMeshAgent.isActiveAndEnabled</code>.  If that returns false, either the gameObject has been set to inactive or the <strong>NavMeshAgent</strong> component on it is disabled.   These are both pretty standard checks for weird Unity behaviors.</p>
-<p>Next up, we can actually test if the agent is "really" on a mesh by asking it.   <code>_navMeshAgent.isOnNavMesh</code> returns <em>true</em>, then the agent is properly placed on a <strong>NavMesh</strong> compatible with its agent.   In this case, you should be good to go, and you won't get the "active agent..." errors for that particular game object.</p>
+<p>Next up, we can actually test if the agent is "really" on a mesh by asking it.  If  <code>_navMeshAgent.isOnNavMesh</code> returns <em>true</em>, then the agent is properly placed on a <strong>NavMesh</strong> compatible with its agent.   In this case, you should be good to go, and you won't get the "active agent..." errors for that particular game object.</p>
 <p>But what if <code>isOnNavMesh</code> returns <em>false</em>?</p>
 <p>First off, verify that the Agent Type selected for the agent is compatible with the NavMesh that you believe it to be on.   If you only create the "humanoid" NavMesh, and you've got a non-humanoid agent, it'll never work.</p>
 <p>Otherwise, we should be able to fix it.</p>
-<p>There's two pieces of "magic sauce" here.   One of them its the <code>NavMesh.SamplePosition</code> function.  Note that this is a class ("static" ) function on NavMesh.   All of NavMesh's user-accessible functions are static; which means—among other things—that our options for moving it off-thread will be limited, later.</p>
+<p>There's two pieces of "magic sauce" here.   One of them its the <code>NavMesh.SamplePosition</code> function.  Note that this is a class ("static") function on NavMesh.   All of NavMesh's user-accessible functions are static; which means—among other things—that our options for moving it off-thread will be limited, later.</p>
 <p><code>SamplePosition</code>() works a lot like <code>Physics.Raycast()</code>.  It takes a starting position, tries to find the nearest NavMesh point from it, and returns that value if it works.</p>
 <p>So:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NavMesh</span><span class="p">.</span><span class="n">SamplePosition</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">NavMeshHit</span><span class="w"> </span><span class="n">hit</span><span class="p">,</span><span class="w"> </span><span class="m">8f</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"></span>
@@ -552,6 +555,9 @@
 <p>The result was something called "Components for Runtime NavMesh Building."   You can learn all about it in a <a href="https://learn.unity.com/tutorial/runtime-navmesh-generation?uv=2017.1">Unity Learn Tutorial here</a>.   These were a set of "prerelease" components available from a Github project that were eventually meant to end up in Unity itself.   They worked by adding a component (<strong>NavMeshSurface</strong>) to the gameObjects that are part of the "environment" and then calling a function to go out and find all these, and use them to build a NavMesh.   But the Eye of Unity is easily distracted, and it quickly went off to start a new incompatible render pipeline or something.</p>
 <p>This tutorial makes two claims of note:  that these would eventually become part of Unity itself (they didn't), and that they are fast enough to use at runtime, even every frame, at least on simple stuff.    That second claim is likely true for things like procedural dungeons with relatively simple structures, but it sure doesn't seem to work that fast on Terrains.</p>
 <p>You still see poor lost souls wandering the Internet trying to use these; any reference to <strong>NavMeshSurface</strong> is a red flag.   Back away slowly and don't make eye contact.   I've actually managed to get them working even in Unity 2021.3, but the fact that these components have been abandoned for half a decade now doesn't give us confidence in using them.</p>
+<blockquote>
+<p><strong>[Update: November, 2022]:</strong> It appears that I spoke too soon!  Unity 2022 versions appear to have NavMeshSurface built in, so apparently it <em>did</em> finally make it to production.    That said, you'll still probably need the techniques described below for performance if your meshes are very complex.</p>
+</blockquote>
 <h2 id="using-navmeshbuilder">Using NavMeshBuilder<a class="headerlink" href="#using-navmeshbuilder" title="Permanent link">&para;</a></h2>
 <p>So let's go back to the "low level" API, and try to build this ourselves.  There are basically four steps that we need to perform:</p>
 <p>1) Collect a list of the surfaces we're interested in some volume of (virtual) space.
@@ -597,7 +603,7 @@
 <span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">NavMeshBuildMarkup</span><span class="p">&gt;(),</span><span class="w"></span>
 <span class="w">            </span><span class="n">buildSources</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
-<p>There's an alternate form of <code>CollectSources</code> that takes a <strong>GameObject</strong> as the first parameter (instead of the bounds) and builds only from that object and it's children.   Depending on how your game objects are structured in the hierarchy, one of the other will likely be easiest for you.</p>
+<p>There's an alternate form of <code>CollectSources</code> that takes a <strong>GameObject</strong> as the first parameter (instead of the bounds) and builds only from that object and its children.   Depending on how your game objects are structured in the hierarchy, one of the other will likely be easiest for you.</p>
 <h3 id="get-the-build-settings-for-each-agent-type">Get the Build Settings for each Agent Type<a class="headerlink" href="#get-the-build-settings-for-each-agent-type" title="Permanent link">&para;</a></h3>
 <p>This one's easy:</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">GetSettingsCount</span><span class="p">();</span><span class="w"> </span><span class="n">agentIndex</span><span class="p">++)</span><span class="w"></span>
@@ -643,7 +649,7 @@
 <p>That's it!   We've successfully made a <strong>NavMesh</strong> at runtime.   We're done!</p>
 <h2 id="wait-why-are-you-still-here">Wait, why are you still here?<a class="headerlink" href="#wait-why-are-you-still-here" title="Permanent link">&para;</a></h2>
 <p>OK, <em>maybe</em> we're done.   Does your game have discrete levels with loading screens or other natural breaks between them?   Then the code above should work fine for you.   The fact that the <strong>NavMesh</strong> takes a fairly long time to generate can be "hidden" in the level transition, even an extra second might not be a dealbreaker.</p>
-<p>But how 'bout that floating origin system we were talking about, above—or a game where deformation of the levels (explosions taking out walls, collapsing floors, sliding walls, portcullises, or whatever) can invalidate the <strong>NavMesh</strong> during play, requiring us to rebuild one.</p>
+<p>But how 'bout that floating origin system we were talking about, above—or a game where deformation of the levels (explosions taking out walls, collapsing floors, sliding walls, portcullises, or whatever) can invalidate the <strong>NavMesh</strong> during play, requiring us to rebuild one?</p>
 <p>Well, the above code might still work for you.  It depends on the complexity (and raw size) of your level, and the frame rate you want to maintain.  Turn-based games might still be fine.   Maybe.</p>
 <p>Let's look at some numbers.    I just used the <strong>System.Diagnostics.Stopwatch</strong> to record elapsed time markers in at various places, then printed them out after the process was complete (using <em>Debug.Log</em> or other printing during the process would affect the results).</p>
 <p>Assuming we want our game to run at 120 frames/second, that gives us a budget of 1000/120 = about 8 milliseconds per frame.   Your frame rate needs may vary.   That 8 ms is the <em>total</em> time available; not just for mesh generation, but everything else that Unity needs to do in a frame.    That's a perfect world -- it's usually OK for a frame to occasionally run long, but we need the total number of milliseconds per frame to be low, ideally single digits.</p>
@@ -699,7 +705,7 @@
 </code></pre></div>
 <p>Note that <code>UpdateNavMeshDataAsync</code> returns an <strong>AsyncOperation</strong>, one of the approximately 52,937,419 different asynchronous mechanisms in .NET (the Flaming Eye of Microsoft is also easily distracted, <em>especially</em> with developer frameworks).    Off the top of my head, I don't even remember whether this one moves the work off-thread or not; for our purposes, it doesn't really matter.</p>
 <h3 id="rebuild-for-asynchronicity">Rebuild for Asynchronicity<a class="headerlink" href="#rebuild-for-asynchronicity" title="Permanent link">&para;</a></h3>
-<p>So the trick here is that we're going to need to move this work to a co-routine, and re-arrange things a little bit to make it work.   It's not going to be a perfect solution; it's still going to take some time for our new <strong>NavMesh</strong> to be ready, we're just not going to interrupt the rest of the game while we wait for it.   If you're in a scenario where you can keep using the old mesh until the new one is available; you should.    If you can't (your "terrain" objects are changing position, origin, or whatever), you'll need to be prepared for there to be some time when your <strong>NavMeshAgents</strong> have no mesh to use, and do something intelligent with that time (move them in a straight line, idle them, have them stand and guard, or taunt, whatever).</p>
+<p>So the trick here is that we're going to need to move this work to a co-routine, and re-arrange things a little bit to make it work.   It's not going to be a perfect solution; it's still going to take some time for our new <strong>NavMesh</strong> to be ready, we're just not going to interrupt the rest of the game while we wait for it.   If you're in a scenario where you can keep using the old mesh until the new one is available—you should.    If you can't (because your "terrain" objects are changing position, origin, or whatever), you'll need to be prepared for there to be some time when your <strong>NavMeshAgents</strong> have no mesh to use, and do something intelligent with that time (move them in a straight line, idle them, have them stand and guard, or taunt, whatever).</p>
 <p>But in return for that bit of complexity, we should be able to easily do the actual mesh exchange in a millisecond or two, so frame rate shouldn't t be affected at all.</p>
 <p>Your coroutine may look a little different from mine, depending on where you get some of your parameters from, but I'm going to pass in the center point of the new mesh bounds, a single radius for all axes, and a boolean flag for whether I'm adding to or replacing an existing mesh.</p>
 <p>Here's the whole thing:</p>
@@ -815,10 +821,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.39f04ddb.min.js"></script>
+      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
@@ -826,6 +832,7 @@
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
       
+    
     
   </body>
 </html>
