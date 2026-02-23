@@ -4,11 +4,7 @@ title: Christopher Kempke's Blog
 
 Welcome to my little corner of the Internet!
 
-I'll assume you're one of my legions of fans that have come from the Terrain Generation pages: [https://ckempke.github.io/UnityTerrainGeneration](https://ckempke.github.io/UnityTerrainGeneration) with questions like "wait, you have legions of fans?" and "how do I actually find what's new on that site, anyway?"     
-
-You'll be ecstatic to learn that this is a much more traditional "Blog" format, with, like, dated pages and "most-recent-at-the-top" and all that cool stuff that was state of the art in the late 90's.
-
-
+I am, as always, restructuring things here to match my inclination-of-the-day, so if something's not working for you, let me know or just come back in a few hours.
 
 ## The Actual Blog
 
@@ -20,17 +16,19 @@ I'm Chris Kempke.  Over my 30-year career, I've worked for a few consulting comp
 
 Now retired, I've been spending my time writing (both fiction and not), and learning some of those technologies I didn't have time for in my working life.    I still have too many hobbies, and occasionally do a little consulting to keep my hand in.
 
-A lot of my time these days is spent in Unity (the 3D game engine), mostly trying to make it do things that it doesn't want to do.   I tend to write about those, too; I haven't yet made the jump to video like all the "cool kids" are doing these days.
+A lot of my time these days is spent in game engines, mostly trying to make them do things that they want to do.  
+
+ I tend to write about those, too; I haven't yet made the jump to video like all the "cool kids" are doing these days.
 
 My blogging software is adapted from a system more intended for documentation; it does not have a "comments" section, as you can probably tell by the lack of off-topic badly-written political rants.   But if you have comments, you can e-mail them to me at my gmail.com address of "Christopher.kempke" and maybe I'll add constructive comments here, manually.
 
-My own little rant is that I'm not a fan of most of the large social media apps:  I blame their algorithmic, engagement-driven but truth-independent "filtering" for a society in which there seems to be no conspiracy or information so obviously, ridiculously, over-the-top-obviously false that about a third of supposedly rational adults won't _still_ somehow believe it.    So now that I have no need to integrate with these things for work, I don't.  I have no (active, anyway) accounts on Facebook, Twitter, Instagram, TikTok, etc.
+My own little rant is that I'm not a fan of most of the large social media apps:  I blame their algorithmic, engagement-driven but truth-independent "filtering" for a society in which there seems to be no conspiracy or information so obviously, ridiculously, over-the-top-obviously false that about a third of supposedly rational adults won't _still_ somehow believe it.    So now that I have no need to integrate with these things for work, I don't.  I have no (active, anyway) accounts on Facebook, Twitter (aka X), Instagram, TikTok, etc.
 
 I do maintain a presence on LinkedIn, primarily because it amuses me how their algorithms _don't_ handle "Retired" as a status, and keep recommending to me hundreds of people at "my company: Retired" as close network associates.    But if you need a temporary, part-time employee for a technical or documentation project, feel free to reach out to me.  I might be interested.
 
 ## About this Site
 
-A few of you may have stumbled on my previous blog, with one of those hosting services that shall not be named.   I'm not entirely sure how they continue to exist, but this one takes forever (minutes sometimes) to process every change, doesn't support Safari (mobile or desktop) with their main theme, and seems more intent on upselling various services than actually providing a web site.   Ah, well, water under the bridge.
+A few of you may have stumbled on my previous blog, with one of those hosting services that shall not be named.   I'm not entirely sure how they continue to exist, but that one takes forever (minutes sometimes) to process every change, doesn't support Safari (mobile or desktop) with their main theme, and seems more intent on upselling various services than actually providing a web site.   Ah, well, water under the bridge.
 
 Very expensive water.
 
@@ -54,7 +52,7 @@ But if I actually change content in a significant way (correcting something that
 
 If this site uses cookies, I don't know about them.   It's possible the underlying document presentation engine does.   In any event, by continuing to use the site:  
 
-- You agree to all cookies, even the ones with raisins in them and even if you don't like raisins.   
+- You agree to all cookies, even the ones with raisins in the, even if you don't like raisins.   
 - You also agree to send me all your money
 - You agree not to consult a lawyer about whether or not the previous clause is enforceable or not.
 
