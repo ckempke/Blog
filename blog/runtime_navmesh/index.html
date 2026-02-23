@@ -14,8 +14,14 @@
       
         <link rel="canonical" href="https://ckempke.github.io/Blog/blog/runtime_navmesh/">
       
+      
+      
+      
+        
+      
+      
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
     
     
       
@@ -23,15 +29,17 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
-        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
+
     
+    
+      
     
     
       
@@ -45,11 +53,10 @@
     
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
-    
     
     
   </head>
@@ -62,11 +69,8 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
   
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -86,16 +90,19 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Christopher Kempke&#39;s Blog" class="md-header__button md-logo" aria-label="Christopher Kempke's Blog" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -114,64 +121,76 @@
       </div>
     </div>
     
-      <form class="md-header__option" data-md-component="palette">
-        
-          
-          
-          
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
-          
-            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-            </label>
-          
-        
-          
-          
-          
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
-          
-            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
-            </label>
-          
-        
-      </form>
+      
+        <form class="md-header__option" data-md-component="palette">
+  
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
       </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
   </div>
 </div>
+      
     
     
   </nav>
@@ -196,12 +215,13 @@
                     
 
 
+
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Christopher Kempke&#39;s Blog" class="md-nav__button md-logo" aria-label="Christopher Kempke's Blog" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     Christopher Kempke's Blog
@@ -211,14 +231,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../.." class="md-nav__link">
-        Home
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -226,14 +258,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../tags/" class="md-nav__link">
-        Posts by Topic
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Posts by Topic
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -267,7 +311,11 @@
       
         <li class="md-nav__item">
   <a href="#background" class="md-nav__link">
-    Background
+    <span class="md-ellipsis">
+      
+        Background
+      
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Background">
@@ -275,21 +323,33 @@
         
           <li class="md-nav__item">
   <a href="#navmesh" class="md-nav__link">
-    NavMesh
+    <span class="md-ellipsis">
+      
+        NavMesh
+      
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#navmeshagent" class="md-nav__link">
-    NavMeshAgent
+    <span class="md-ellipsis">
+      
+        NavMeshAgent
+      
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#navagent-active-agent-placed-on-a-navmesh-errors" class="md-nav__link">
-    NavAgent "active agent ... placed on a NavMesh" Errors
+    <span class="md-ellipsis">
+      
+        NavAgent "active agent ... placed on a NavMesh" Errors
+      
+    </span>
   </a>
   
 </li>
@@ -301,7 +361,11 @@
       
         <li class="md-nav__item">
   <a href="#what-we-we-talking-about-again" class="md-nav__link">
-    What we we talking about, again?
+    <span class="md-ellipsis">
+      
+        What we we talking about, again?
+      
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="What we we talking about, again?">
@@ -309,7 +373,11 @@
         
           <li class="md-nav__item">
   <a href="#components-for-runtime-navmesh-building" class="md-nav__link">
-    Components for Runtime NavMesh Building.
+    <span class="md-ellipsis">
+      
+        Components for Runtime NavMesh Building.
+      
+    </span>
   </a>
   
 </li>
@@ -321,7 +389,11 @@
       
         <li class="md-nav__item">
   <a href="#using-navmeshbuilder" class="md-nav__link">
-    Using NavMeshBuilder
+    <span class="md-ellipsis">
+      
+        Using NavMeshBuilder
+      
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Using NavMeshBuilder">
@@ -329,28 +401,44 @@
         
           <li class="md-nav__item">
   <a href="#collecting-sources" class="md-nav__link">
-    Collecting Sources
+    <span class="md-ellipsis">
+      
+        Collecting Sources
+      
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#get-the-build-settings-for-each-agent-type" class="md-nav__link">
-    Get the Build Settings for each Agent Type
+    <span class="md-ellipsis">
+      
+        Get the Build Settings for each Agent Type
+      
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#build-the-navmeshdata" class="md-nav__link">
-    Build the NavMeshData
+    <span class="md-ellipsis">
+      
+        Build the NavMeshData
+      
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#add-the-navmesh-to-the-scene" class="md-nav__link">
-    Add the NavMesh to the Scene
+    <span class="md-ellipsis">
+      
+        Add the NavMesh to the Scene
+      
+    </span>
   </a>
   
 </li>
@@ -362,7 +450,11 @@
       
         <li class="md-nav__item">
   <a href="#wait-why-are-you-still-here" class="md-nav__link">
-    Wait, why are you still here?
+    <span class="md-ellipsis">
+      
+        Wait, why are you still here?
+      
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Wait, why are you still here?">
@@ -370,7 +462,11 @@
         
           <li class="md-nav__item">
   <a href="#rebuild-for-asynchronicity" class="md-nav__link">
-    Rebuild for Asynchronicity
+    <span class="md-ellipsis">
+      
+        Rebuild for Asynchronicity
+      
+    </span>
   </a>
   
 </li>
@@ -382,7 +478,11 @@
       
         <li class="md-nav__item">
   <a href="#so-does-it-work" class="md-nav__link">
-    So does it work?
+    <span class="md-ellipsis">
+      
+        So does it work?
+      
+    </span>
   </a>
   
 </li>
@@ -397,12 +497,15 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
 
 
-<div class="blogging-tags-grid">
+
+<div class="md-typeset">
+    <div class="blogging-tags-grid">
 
         <a href="https://ckempke.github.io/Blog/tags#Unity" class="blogging-tag"><code>#Unity</code></a>
 
@@ -413,6 +516,9 @@
         <a href="https://ckempke.github.io/Blog/tags#games" class="blogging-tag"><code>#games</code></a>
 
     </div>
+
+
+</div>
 
 <style>
     .md-typeset .blogging-tags-grid {
@@ -426,6 +532,8 @@
     .md-typeset .blogging-tag {
         color: var(--md-typeset-color);
         background-color: var(--md-typeset-code-color);
+        white-space: nowrap;
+        display: block;
     }
 
     .md-typeset .blogging-tag code {
@@ -433,7 +541,7 @@
     }
 </style>
 <h1 id="asynchronous-runtime-navmesh-generation-in-unity">Asynchronous Runtime Navmesh Generation in Unity<a class="headerlink" href="#asynchronous-runtime-navmesh-generation-in-unity" title="Permanent link">&para;</a></h1>
-<p><strong>[Update: Dec, 2022].  In Unity 2022.2+, be careful of using this stuff.   They (Unity) finally integrated the NavMeshSurface code, and deprecated some of the existing NavMesh tools.    So far as I know, everything here still works, but I haven't had a chance to play with the new stuff in depth yet to see if there are "gotchas." </strong></p>
+<p>**[Update: Dec, 2022].  In Unity 2022.2+, be careful of using this stuff.   They (Unity) finally integrated the NavMeshSurface code, and deprecated some of the existing NavMesh tools.    So far as I know, everything here still works, but I haven't had a chance to play with the new stuff in depth yet to see if there are "gotchas." **</p>
 <p>Buckle in, boys and girls.  This one's going to be a ride.</p>
 <p>I've recently started trying to add monsters to the world I'm creating over in my <a href="https://ckempke.github.io/UnityTerrainGeneration">Unity Procedural Terrain</a> system.   I'd like to use the <strong>NavMesh</strong> system for enemy AI, but since my terrains aren't created in the Unity Editor, but rather randomly at runtime, I need to be able to create the <strong>NavMeshes</strong> for my monsters at runtime.</p>
 <p>And thus began the rabbit hole.   It became quickly obvious that <em>it could be done,</em> but equally obvious that there wasn't really a good known solution out there, particularly one that was performant enough to use in a runtime environment where terrains were being created and destroyed at a reasonably fast cadence as the player moves around a large open world.</p>
@@ -476,14 +584,14 @@
 <p>The <strong>NavMeshAgent</strong> also includes an "Agent Type ID", which is defined in the <em>Navigation</em> window's <em>Agents</em> tab.  This duplicates several of the other properties (height, radius, step size, slope), and I'm not at all sure why you have to specify both, since if they don't match, the <strong>NavMeshAgent</strong> won't work.   We'll encounter the Agent Type under another name: "Build Settings" later in the process.    </p>
 <p><em>We will need to generate one NavMesh for every Agent Type that will walk on it.</em>  Since it's expensive to make these (in both memory and computation time), you'll likely want to bucket all of your entities into 2-3 different agent types (or just one, if everybody's human), even if that means some of the sizes won't match exactly.  (This doesn't apply as much if you're baking in the editor where time doesn't matter, but they still take up a fair amount of memory.)</p>
 <p>From scripts, we can access the agent in the usual way we access any component:</p>
-<div class="highlight"><pre><span></span><code><span class="n">NavMeshAgent</span><span class="w"> </span><span class="n">_navMeshAgent</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="p">&lt;</span><span class="n">NavMeshAgent</span><span class="p">&gt;();</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">NavMeshAgent</span><span class="w"> </span><span class="n">_navMeshAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gameObject</span><span class="p">.</span><span class="n">GetComponent</span><span class="o">&lt;</span><span class="n">NavMeshAgent</span><span class="o">&gt;</span><span class="p">();</span>
 </code></pre></div>
 <p>Once you've got the agent, you can set a destination with <code>SetDestination(&lt;Vector3&gt;)</code> and override the speed, acceleration, turn rate, etc. if you like (if you don't, they'll use the ones defined in the agent itself).  The Vector3 passed to "destination" ignores the Y value unless the NavMesh overlaps itself in 3D.</p>
 <p>We actually turn it on by telling the agent it should no longer be stopped:</p>
-<div class="highlight"><pre><span></span><code><span class="n">_navMeshAgent</span><span class="p">.</span><span class="n">isStopped</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span><span class="w">    </span>
+<div class="highlight"><pre><span></span><code><span class="n">_navMeshAgent</span><span class="p">.</span><span class="n">isStopped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span><span class="w">    </span>
 </code></pre></div>
 <p>(You also need the usual stuff like making sure the component is enabled and active.)</p>
-<p>At this point, one of two things will happen:  The agent will start to move the gameObject toward the destination (it controls facing and movement, things like animation are up to you), or you'll start getting tons of error messages about "\&lt;Various Functions> can only be called on an active agent that has been placed on a NavMesh."</p>
+<p>At this point, one of two things will happen:  The agent will start to move the gameObject toward the destination (it controls facing and movement, things like animation are up to you), or you'll start getting tons of error messages about "\&lt;Various Functions&gt; can only be called on an active agent that has been placed on a NavMesh."</p>
 <p>Let's ignore the errors for a moment.   Assuming your agent is moving your gameObject, you can then use the <code>remainingDistance</code> property on the NavMeshAgent to figure out how far the agent is from its destination (say, to give it another waypoint on a patrol route.).   There are two caveats with <code>remainingDistance</code>:</p>
 <p>1) It will return 0 when the agent can go no farther.   This doesn't necessarily mean that it's at the destination you originally specified, just that it's as close as the NavMesh allows to that point (which could be quite far away, if you specified a someplace way off the mesh).
 2) If the agent can't move in a straight line to the destination, it tends to return <code>Infinity</code> while it traverses a path, up until the last "leg."  Once it's just on a straight-line route to it's destination, it'll start giving real numbers.</p>
@@ -503,14 +611,14 @@
 <p>There's two pieces of "magic sauce" here.   One of them its the <code>NavMesh.SamplePosition</code> function.  Note that this is a class ("static") function on NavMesh.   All of NavMesh's user-accessible functions are static; which means—among other things—that our options for moving it off-thread will be limited, later.</p>
 <p><code>SamplePosition</code>() works a lot like <code>Physics.Raycast()</code>.  It takes a starting position, tries to find the nearest NavMesh point from it, and returns that value if it works.</p>
 <p>So:</p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NavMesh</span><span class="p">.</span><span class="n">SamplePosition</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">NavMeshHit</span><span class="w"> </span><span class="n">hit</span><span class="p">,</span><span class="w"> </span><span class="m">8f</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"></span>
-<span class="w"> </span><span class="p">{</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NavMesh</span><span class="p">.</span><span class="n">SamplePosition</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">NavMeshHit</span><span class="w"> </span><span class="n">hit</span><span class="p">,</span><span class="w"> </span><span class="mf">8f</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+<span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">// &quot;hit.position&quot; now contains a valid position on the mesh</span>
-<span class="w"> </span><span class="p">}</span><span class="w"></span>
-<span class="w"> </span><span class="k">else</span><span class="w"></span>
-<span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">else</span>
+<span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">// We&#39;re not close enough to a valid mesh position, do something else</span>
-<span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 <p>The arguments to <code>SamplePosition</code> are</p>
 <ul>
@@ -523,24 +631,24 @@
 <p>But let's say that SamplePosition has returned <em>true</em>, and now we've got a shiny valid position in <code>hit.position</code>.   We can just set our <code>transform.position = hit.position</code> and we're off, right?  Right?</p>
 <p>Of course not.   Not always, anyway.   It seems to work about half the time.</p>
 <p>To actually move there, use the <code>NavMeshAgent.Warp()</code> function.  This will move the agent's object to the specified position and then apparently do some magic to glue it to the NavMesh.   It returns <em>true</em> if successful, which should be basically always if you're feeding it a position from <code>SamplePosition</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NavMesh</span><span class="p">.</span><span class="n">SamplePosition</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">NavMeshHit</span><span class="w"> </span><span class="n">hit</span><span class="p">,</span><span class="w"> </span><span class="m">8f</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"></span>
-<span class="w"> </span><span class="p">{</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">NavMesh</span><span class="p">.</span><span class="n">SamplePosition</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">NavMeshHit</span><span class="w"> </span><span class="n">hit</span><span class="p">,</span><span class="w"> </span><span class="mf">8f</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+<span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">// &quot;hit.position&quot; now contains a valid position on the mesh</span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navMeshAgent</span><span class="p">.</span><span class="n">Warp</span><span class="p">(</span><span class="n">hit</span><span class="p">.</span><span class="n">position</span><span class="p">))</span><span class="w"></span>
-<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_navMeshAgent</span><span class="p">.</span><span class="n">Warp</span><span class="p">(</span><span class="n">hit</span><span class="p">.</span><span class="n">position</span><span class="p">))</span>
+<span class="w">      </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// We&#39;re good, and the agent should work now.</span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="k">else</span><span class="w"></span>
-<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">else</span>
+<span class="w">      </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Something weird happened, probably the NavMesh or NavMeshAgent became invalid</span>
 <span class="w">        </span><span class="c1">// somehow.   We have to handle it, of course, but it&#39;s going to</span>
 <span class="w">        </span><span class="c1">// be a rare case, so maybe just destroying the object is good enough?</span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w"> </span><span class="p">}</span><span class="w"></span>
-<span class="w"> </span><span class="k">else</span><span class="w"></span>
-<span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">else</span>
+<span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="c1">// We&#39;re not close enough to a valid mesh position, do something else</span>
-<span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 <h2 id="what-we-we-talking-about-again">What we we talking about, again?<a class="headerlink" href="#what-we-we-talking-about-again" title="Permanent link">&para;</a></h2>
 <p>Oh yeah.   Runtime NavMesh generation.</p>
@@ -568,14 +676,14 @@
 <h3 id="collecting-sources">Collecting Sources<a class="headerlink" href="#collecting-sources" title="Permanent link">&para;</a></h3>
 <p>The first thing we want to do is collect a list of the surfaces, or <em>sources</em> that are available as potential parts of our NavMesh.    This list is independent of Agent Type, so we've only got to do it once for a given volume of space.   This will be done with <code>NavMeshBuilder.CollectSources()</code>, which takes six parameters.</p>
 <p>The first thing we need to do is specify the volume of space that the NavMesh will be built in.   The larger this space, the longer it takes to build the mesh; I'll give you some actual numbers later on.   But however we determine it, we'll need to create a <code>Bounds</code> object with it.  That's basically a cube or box with a center and a radius along each axis.   Here I make one centered on the player.   My world is very 3D, so I use the same radius on all three axis.   If yours is relatively flat, you might want to use a much smaller value for "y".</p>
-<div class="highlight"><pre><span></span><code><span class="n">Bounds</span><span class="w"> </span><span class="n">patchBounds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bounds</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">));</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">Bounds</span><span class="w"> </span><span class="n">patchBounds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bounds</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">));</span>
 </code></pre></div>
 <p>Next, you may or may not want every object in your scene to potentially be a walkable surface; it depends on your game.   If you want to limit it to just certain objects, collect them into a layer.   I use one called "Terrain".   We're going to need a layer <em>mask</em>, which we get similarly to the area masks we described above:</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;Terrain&quot;</span><span class="p">);</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;Terrain&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p>If you need more layers, "or" them together:</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="p">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;FirstLayer&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="p">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;SecondLayer&quot;</span><span class="p">));</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;FirstLayer&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;SecondLayer&quot;</span><span class="p">));</span>
 </code></pre></div>
 <p>And so on.   You could use 0xFFFF to set all bits, but that's likely to get you some pretty weird layers, and it's fragile in the face of third-party assets that often add layers.   Better to specify them exactly.</p>
 <blockquote>
@@ -588,62 +696,62 @@
 <p>With these six decisions in hand, we're ready to call <code>NavMeshBuilder.CollectSources</code>, which will do the actual scan of the Scene to find the sources and return them to us:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// Get the list of all &quot;sources&quot; around us.  This is basically little gridded subsquares</span>
 <span class="c1">// of our terrains.</span>
-<span class="n">List</span><span class="p">&lt;</span><span class="n">NavMeshBuildSource</span><span class="p">&gt;</span><span class="w"> </span><span class="n">buildSources</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">NavMeshBuildSource</span><span class="p">&gt;();</span><span class="w"></span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">NavMeshBuildSource</span><span class="o">&gt;</span><span class="w"> </span><span class="n">buildSources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">NavMeshBuildSource</span><span class="o">&gt;</span><span class="p">();</span>
 
 <span class="c1">// Set up a boundary area for the build sources collector to look at;</span>
-<span class="n">Bounds</span><span class="w"> </span><span class="n">patchBounds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bounds</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="n">Monster</span><span class="p">.</span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">Monster</span><span class="p">.</span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">Monster</span><span class="p">.</span><span class="n">navigationMeshRadius</span><span class="p">));</span><span class="w"></span>
+<span class="n">Bounds</span><span class="w"> </span><span class="n">patchBounds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bounds</span><span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="n">Monster</span><span class="p">.</span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">Monster</span><span class="p">.</span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">Monster</span><span class="p">.</span><span class="n">navigationMeshRadius</span><span class="p">));</span>
 
 <span class="c1">// This actually collects them</span>
-<span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">CollectSources</span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="n">patchBounds</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="m">1</span><span class="w"> </span><span class="p">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;Terrain&quot;</span><span class="p">),</span><span class="w"></span>
-<span class="w">            </span><span class="n">NavMeshCollectGeometry</span><span class="p">.</span><span class="n">PhysicsColliders</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="m">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">NavMeshBuildMarkup</span><span class="p">&gt;(),</span><span class="w"></span>
-<span class="w">            </span><span class="n">buildSources</span><span class="p">);</span><span class="w"></span>
+<span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">CollectSources</span><span class="p">(</span>
+<span class="w">            </span><span class="n">patchBounds</span><span class="p">,</span>
+<span class="w">            </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;Terrain&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="n">NavMeshCollectGeometry</span><span class="p">.</span><span class="n">PhysicsColliders</span><span class="p">,</span>
+<span class="w">            </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">NavMeshBuildMarkup</span><span class="o">&gt;</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">buildSources</span><span class="p">);</span>
 </code></pre></div>
 <p>There's an alternate form of <code>CollectSources</code> that takes a <strong>GameObject</strong> as the first parameter (instead of the bounds) and builds only from that object and its children.   Depending on how your game objects are structured in the hierarchy, one of the other will likely be easiest for you.</p>
 <h3 id="get-the-build-settings-for-each-agent-type">Get the Build Settings for each Agent Type<a class="headerlink" href="#get-the-build-settings-for-each-agent-type" title="Permanent link">&para;</a></h3>
 <p>This one's easy:</p>
-<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">GetSettingsCount</span><span class="p">();</span><span class="w"> </span><span class="n">agentIndex</span><span class="p">++)</span><span class="w"></span>
-<span class="w">   </span><span class="p">{</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">GetSettingsCount</span><span class="p">();</span><span class="w"> </span><span class="n">agentIndex</span><span class="o">++</span><span class="p">)</span>
+<span class="w">   </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// Get the settings for each of our agent &quot;sizes&quot; (humanoid, giant humanoid)</span>
-<span class="w">            </span><span class="n">NavMeshBuildSettings</span><span class="w"> </span><span class="n">bSettings</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">GetSettingsByIndex</span><span class="p">(</span><span class="n">agentIndex</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">NavMeshBuildSettings</span><span class="w"> </span><span class="n">bSettings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">GetSettingsByIndex</span><span class="p">(</span><span class="n">agentIndex</span><span class="p">);</span>
 
-<span class="w">         </span><span class="p">...</span><span class="w"></span>
-<span class="w">   </span><span class="p">}</span><span class="w"></span>
+<span class="w">         </span><span class="p">...</span>
+<span class="w">   </span><span class="p">}</span>
 </code></pre></div>
 <p>We can treat the <strong>NavMeshBuildSettings</strong> object as opaque, but if you look into it, you'll see it pretty much just contains all those values we set in the Navigation Window's "Agents" tab.</p>
 <p>But there's a handy function on <strong>NavMeshBuildSettings</strong> objects (a member function, not a class/static function) called <code>ValidationReport</code>.  You use it like this:</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#if DEBUG</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#if DEBUG</span>
 <span class="c1">// If there are any issues with the agent, print them out as a warning.</span>
-<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">bSettings</span><span class="p">.</span><span class="n">ValidationReport</span><span class="p">(</span><span class="n">patchBounds</span><span class="p">))</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">   </span><span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">$&quot;BuildSettings Report: {NavMesh.GetSettingsNameFromID(bSettings.agentTypeID)} : {s}&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="cp">#endif</span><span class="w"></span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">bSettings</span><span class="p">.</span><span class="n">ValidationReport</span><span class="p">(</span><span class="n">patchBounds</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">$&quot;BuildSettings Report: {NavMesh.GetSettingsNameFromID(bSettings.agentTypeID)} : {s}&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
 </code></pre></div>
 <p>This will verify that various of the parameters in each Agent Type's build settings are compatible; typically "Step Size" and "Maximum Slope" are the ones most likely to conflict.   These don't necessarily make the <strong>NavMesh</strong> unusable, but you'll get some weird <strong>NavMeshAgent</strong> behaviors if you just ignore the warnings.   The warning will tell you exactly what parameters are incompatible and what values will make them compatible.</p>
 <h3 id="build-the-navmeshdata">Build the NavMeshData<a class="headerlink" href="#build-the-navmeshdata" title="Permanent link">&para;</a></h3>
 <p>Now that we've got all that, we need to use it to build the actual <strong>NavMeshData</strong>.   For that, we call <code>NavMeshBuilder.BuildNavMeshData</code>  <em>for each Agent Type</em>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">NavMeshData</span><span class="w"> </span><span class="n">newData</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">BuildNavMeshData</span><span class="p">(</span><span class="w"></span>
-<span class="w">   </span><span class="n">bSettings</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="n">buildSources</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="n">patchBounds</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="n">Quaternion</span><span class="p">.</span><span class="n">Euler</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">));</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">NavMeshData</span><span class="w"> </span><span class="n">newData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">BuildNavMeshData</span><span class="p">(</span>
+<span class="w">   </span><span class="n">bSettings</span><span class="p">,</span>
+<span class="w">   </span><span class="n">buildSources</span><span class="p">,</span>
+<span class="w">   </span><span class="n">patchBounds</span><span class="p">,</span>
+<span class="w">   </span><span class="n">transform</span><span class="p">.</span><span class="n">position</span><span class="p">,</span>
+<span class="w">   </span><span class="n">Quaternion</span><span class="p">.</span><span class="n">Euler</span><span class="p">(</span><span class="n">Vector3</span><span class="p">.</span><span class="n">up</span><span class="p">));</span>
 </code></pre></div>
 <p>The first three parameters there, we've already discussed, the fourth is the center of the <strong>NavMesh</strong> and should match the center position of patch bounds, and the last is the "up" vector for the local space.</p>
 <p>This is where the real work is happening.   Once it completes, we effectively have our new <strong>NavMesh</strong> in hand, and we just need to make it available to the scene.</p>
 <h3 id="add-the-navmesh-to-the-scene">Add the NavMesh to the Scene<a class="headerlink" href="#add-the-navmesh-to-the-scene" title="Permanent link">&para;</a></h3>
 <p>This one's easy, too:</p>
-<div class="highlight"><pre><span></span><code><span class="n">NavMesh</span><span class="p">.</span><span class="n">AddNavMeshData</span><span class="p">(</span><span class="n">meshData</span><span class="p">);</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">NavMesh</span><span class="p">.</span><span class="n">AddNavMeshData</span><span class="p">(</span><span class="n">meshData</span><span class="p">);</span>
 </code></pre></div>
 <p>The new NavMesh will be available for NavMeshAgents and viewing in the Scene editor on the next frame.   Note that if this is a <em>replacement</em> for an existing NavMesh (you're moving around a large open world with a floating origin system that moves the terrains, <a href="htttps://ckempke.github.io/UnityTerrainGeneration">hypothetically</a>), there are a couple more steps:</p>
 <p>First, we'll need to remove the existing NavMesh before we add the new one.</p>
-<div class="highlight"><pre><span></span><code><span class="n">NavMesh</span><span class="p">.</span><span class="n">RemoveAllNavMeshData</span><span class="p">();</span><span class="w"></span>
-<span class="n">NavMesh</span><span class="p">.</span><span class="n">AddNavMeshData</span><span class="p">(</span><span class="n">meshData</span><span class="p">);</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">NavMesh</span><span class="p">.</span><span class="n">RemoveAllNavMeshData</span><span class="p">();</span>
+<span class="n">NavMesh</span><span class="p">.</span><span class="n">AddNavMeshData</span><span class="p">(</span><span class="n">meshData</span><span class="p">);</span>
 </code></pre></div>
 <p>And second, we'll need to walk through every <strong>NavMeshAgent</strong> and "re-attach" them to the new mesh by calling <code>NavMesh.SamplePosition()</code> and <code>NavMeshAgent.Warp()</code> on them.</p>
 <p>That's it!   We've successfully made a <strong>NavMesh</strong> at runtime.   We're done!</p>
@@ -698,10 +806,10 @@
 </blockquote>
 <p>At this point we should run through our list of obscenities, but once we're done, note that there's one more possibility:  <code>UpdateNavMeshDataAsync()</code>.    This is similar to <code>BuildNavMeshData</code>, except that it <em>adds</em> or <em>removes</em> data from an existing <strong>NavMeshData</strong> object (and doesn't take an "up" vector, so it can only be used for standard orientations).    We can work with that.   It's a little weird, but if we just make an empty <strong>NavMeshData</strong> object and then "Update" it with <em>all</em> the data, we'll get the same end result.  Something like:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="c1">// Make a new mesh data object.</span>
-<span class="n">NavMeshData</span><span class="w"> </span><span class="n">meshData</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NavMeshData</span><span class="p">();</span><span class="w"></span>
+<span class="n">NavMeshData</span><span class="w"> </span><span class="n">meshData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NavMeshData</span><span class="p">();</span>
 
 <span class="c1">// &quot;Update&quot; it from scratch.</span>
-<span class="n">AsyncOperation</span><span class="w"> </span><span class="n">buildOp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">UpdateNavMeshDataAsync</span><span class="p">(</span><span class="n">meshData</span><span class="p">,</span><span class="w"> </span><span class="n">bSettings</span><span class="p">,</span><span class="w"> </span><span class="n">buildSources</span><span class="p">,</span><span class="w"> </span><span class="n">patchBounds</span><span class="p">);</span><span class="w"></span>
+<span class="n">AsyncOperation</span><span class="w"> </span><span class="n">buildOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">UpdateNavMeshDataAsync</span><span class="p">(</span><span class="n">meshData</span><span class="p">,</span><span class="w"> </span><span class="n">bSettings</span><span class="p">,</span><span class="w"> </span><span class="n">buildSources</span><span class="p">,</span><span class="w"> </span><span class="n">patchBounds</span><span class="p">);</span>
 </code></pre></div>
 <p>Note that <code>UpdateNavMeshDataAsync</code> returns an <strong>AsyncOperation</strong>, one of the approximately 52,937,419 different asynchronous mechanisms in .NET (the Flaming Eye of Microsoft is also easily distracted, <em>especially</em> with developer frameworks).    Off the top of my head, I don't even remember whether this one moves the work off-thread or not; for our purposes, it doesn't really matter.</p>
 <h3 id="rebuild-for-asynchronicity">Rebuild for Asynchronicity<a class="headerlink" href="#rebuild-for-asynchronicity" title="Permanent link">&para;</a></h3>
@@ -716,67 +824,67 @@
 <span class="c1">/// &lt;param name=&quot;navigationMeshRadius&quot;&gt;How big a volume should we search for surfaces in.&lt;/param&gt;</span>
 <span class="c1">/// &lt;param name=&quot;rebuildAll&quot;&gt;If &quot;true&quot;, delete any existing meshes before adding new ones.&lt;/param&gt;</span>
 <span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
-<span class="n">IEnumerator</span><span class="w"> </span><span class="nf">NavMeshOutOfDateCoroutine</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">playerPosition</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">rebuildAll</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="n">IEnumerator</span><span class="w"> </span><span class="nf">NavMeshOutOfDateCoroutine</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">playerPosition</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">rebuildAll</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// Get the list of all &quot;sources&quot; around us.  This is basically little gridded subsquares</span>
 <span class="w">        </span><span class="c1">// of our terrains.</span>
-<span class="w">        </span><span class="n">List</span><span class="p">&lt;</span><span class="n">NavMeshBuildSource</span><span class="p">&gt;</span><span class="w"> </span><span class="n">buildSources</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">NavMeshBuildSource</span><span class="p">&gt;();</span><span class="w"></span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">NavMeshBuildSource</span><span class="o">&gt;</span><span class="w"> </span><span class="n">buildSources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">NavMeshBuildSource</span><span class="o">&gt;</span><span class="p">();</span>
 
 <span class="w">        </span><span class="c1">// Set up a boundary area for the build sources collector to look at;</span>
-<span class="w">        </span><span class="n">Bounds</span><span class="w"> </span><span class="n">patchBounds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bounds</span><span class="p">(</span><span class="n">playerPosition</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="n">Bounds</span><span class="w"> </span><span class="n">patchBounds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bounds</span><span class="p">(</span><span class="n">playerPosition</span><span class="p">,</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">,</span><span class="w"> </span><span class="n">navigationMeshRadius</span><span class="p">));</span>
 
 <span class="w">        </span><span class="c1">// This actually collects the potential surfaces.</span>
-<span class="w">        </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">CollectSources</span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="n">patchBounds</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="m">1</span><span class="w"> </span><span class="p">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;Terrain&quot;</span><span class="p">),</span><span class="w"></span>
-<span class="w">            </span><span class="n">NavMeshCollectGeometry</span><span class="p">.</span><span class="n">PhysicsColliders</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="m">0</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">NavMeshBuildMarkup</span><span class="p">&gt;(),</span><span class="w"></span>
-<span class="w">            </span><span class="n">buildSources</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">CollectSources</span><span class="p">(</span>
+<span class="w">            </span><span class="n">patchBounds</span><span class="p">,</span>
+<span class="w">            </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">LayerMask</span><span class="p">.</span><span class="n">NameToLayer</span><span class="p">(</span><span class="s">&quot;Terrain&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="n">NavMeshCollectGeometry</span><span class="p">.</span><span class="n">PhysicsColliders</span><span class="p">,</span>
+<span class="w">            </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">NavMeshBuildMarkup</span><span class="o">&gt;</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">buildSources</span><span class="p">);</span>
 
-<span class="w">        </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
 
 <span class="w">        </span><span class="c1">// Build some empty NavMeshData objects</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">numAgentTypes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">GetSettingsCount</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">NavMeshData</span><span class="p">[]</span><span class="w"> </span><span class="n">meshData</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NavMeshData</span><span class="p">[</span><span class="n">numAgentTypes</span><span class="p">];</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">numAgentTypes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">GetSettingsCount</span><span class="p">();</span>
+<span class="w">        </span><span class="n">NavMeshData</span><span class="p">[]</span><span class="w"> </span><span class="n">meshData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NavMeshData</span><span class="p">[</span><span class="n">numAgentTypes</span><span class="p">];</span>
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="n">numAgentTypes</span><span class="p">;</span><span class="w"> </span><span class="n">agentIndex</span><span class="p">++)</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">agentIndex</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numAgentTypes</span><span class="p">;</span><span class="w"> </span><span class="n">agentIndex</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// Get the settings for each of our agent &quot;sizes&quot; (humanoid, giant humanoid)</span>
-<span class="w">            </span><span class="n">NavMeshBuildSettings</span><span class="w"> </span><span class="n">bSettings</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">GetSettingsByIndex</span><span class="p">(</span><span class="n">agentIndex</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">NavMeshBuildSettings</span><span class="w"> </span><span class="n">bSettings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">GetSettingsByIndex</span><span class="p">(</span><span class="n">agentIndex</span><span class="p">);</span>
 
 <span class="w">            </span><span class="c1">// If there are any issues with the agent, print them out as a warning.</span>
-<span class="cp">#if DEBUG</span><span class="w"></span>
-<span class="w">            </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">bSettings</span><span class="p">.</span><span class="n">ValidationReport</span><span class="p">(</span><span class="n">patchBounds</span><span class="p">))</span><span class="w"></span>
-<span class="w">            </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">$&quot;BuildSettings Report: {NavMesh.GetSettingsNameFromID(bSettings.agentTypeID)} : {s}&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="cp">#endif</span><span class="w"></span>
+<span class="cp">#if DEBUG</span>
+<span class="w">            </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">bSettings</span><span class="p">.</span><span class="n">ValidationReport</span><span class="p">(</span><span class="n">patchBounds</span><span class="p">))</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Debug</span><span class="p">.</span><span class="n">LogWarning</span><span class="p">(</span><span class="s">$&quot;BuildSettings Report: {NavMesh.GetSettingsNameFromID(bSettings.agentTypeID)} : {s}&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="cp">#endif</span>
 <span class="w">            </span><span class="c1">// Make empty mesh data object.</span>
-<span class="w">            </span><span class="n">meshData</span><span class="p">[</span><span class="n">agentIndex</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NavMeshData</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">meshData</span><span class="p">[</span><span class="n">agentIndex</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NavMeshData</span><span class="p">();</span>
 
-<span class="w">            </span><span class="n">AsyncOperation</span><span class="w"> </span><span class="n">buildOp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">UpdateNavMeshDataAsync</span><span class="p">(</span><span class="n">meshData</span><span class="p">[</span><span class="n">agentIndex</span><span class="p">],</span><span class="w"> </span><span class="n">bSettings</span><span class="p">,</span><span class="w"> </span><span class="n">buildSources</span><span class="p">,</span><span class="w"> </span><span class="n">patchBounds</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">AsyncOperation</span><span class="w"> </span><span class="n">buildOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NavMeshBuilder</span><span class="p">.</span><span class="n">UpdateNavMeshDataAsync</span><span class="p">(</span><span class="n">meshData</span><span class="p">[</span><span class="n">agentIndex</span><span class="p">],</span><span class="w"> </span><span class="n">bSettings</span><span class="p">,</span><span class="w"> </span><span class="n">buildSources</span><span class="p">,</span><span class="w"> </span><span class="n">patchBounds</span><span class="p">);</span>
 
-<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(!</span><span class="n">buildOp</span><span class="p">.</span><span class="n">isDone</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">buildOp</span><span class="p">.</span><span class="n">isDone</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rebuildAll</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">RemoveAllNavMeshData</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rebuildAll</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">RemoveAllNavMeshData</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">nmd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">nmd</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="n">meshData</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">nmd</span><span class="p">++)</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">AddNavMeshData</span><span class="p">(</span><span class="n">meshData</span><span class="p">[</span><span class="n">nmd</span><span class="p">]);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">nmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">nmd</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">meshData</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">nmd</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">NavMesh</span><span class="p">.</span><span class="n">AddNavMeshData</span><span class="p">(</span><span class="n">meshData</span><span class="p">[</span><span class="n">nmd</span><span class="p">]);</span>
+<span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 </code></pre></div>
 <p>There are a few key lines there, particularly the various <code>yield return null;</code> ones.  If you're not familiar with coroutines, that's just code for "stop here for this frame, go do whatever else you want, and resume here on the next frame."</p>
 <p>In particular, most of the (non) work is done by:</p>
-<div class="highlight"><pre><span></span><code><span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(!</span><span class="n">buildOp</span><span class="p">.</span><span class="n">isDone</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">buildOp</span><span class="p">.</span><span class="n">isDone</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
 </code></pre></div>
 <p>That line is where most of the time in the coroutine is spent.  It just checks to see "is the AsyncOperation done, yet?" And yields until the next frame if it isn't.   Eventually, everything completes and the rest of the code takes only a few milliseconds to actually instantiate the mesh.</p>
 <p>Also note that we build all the meshes, <em>then</em> remove existing ones (if we're going to), <em>then</em> add the new ones all at once rather than as each one is built.   This minimizes the time when no mesh exists at all -- in fact, since there's no <code>yield</code> between the removal and the adds, the new mesh should be available in the very same frame as the old one goes away.  (The old <strong>NavMesh</strong> may or may not still be valid that long, but for most uses it won't matter if it hangs around while we make the new one.)</p>
@@ -789,11 +897,22 @@
 
 
 
+
+
+  
+  
+
+
+
+
+
+
                 
               </article>
             </div>
           
           
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
       </main>
@@ -821,10 +940,14 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
@@ -832,7 +955,6 @@
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
       
-    
     
   </body>
 </html>
