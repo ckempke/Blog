@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://ckempke.github.io/Blog/</loc>
+         <loc>https://chriskempke.com/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
-         <loc>https://ckempke.github.io/Blog/tags/</loc>
+         <loc>https://chriskempke.com/tags/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
-         <loc>https://ckempke.github.io/Blog/blog/1-AUG-2022/</loc>
+         <loc>https://chriskempke.com/blog/1-AUG-2022/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
-         <loc>https://ckempke.github.io/Blog/blog/23-FEB-2026/</loc>
+         <loc>https://chriskempke.com/blog/23-FEB-2026/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
-         <loc>https://ckempke.github.io/Blog/blog/7-JULY-2021/</loc>
+         <loc>https://chriskempke.com/blog/7-JULY-2021/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
-         <loc>https://ckempke.github.io/Blog/blog/8-DEC-2021/</loc>
+         <loc>https://chriskempke.com/blog/8-DEC-2021/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
-         <loc>https://ckempke.github.io/Blog/blog/ai-generated-art/</loc>
+         <loc>https://chriskempke.com/blog/ai-generated-art/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
-         <loc>https://ckempke.github.io/Blog/blog/procedural-language/</loc>
+         <loc>https://chriskempke.com/blog/procedural-language/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
     <url>
-         <loc>https://ckempke.github.io/Blog/blog/runtime_navmesh/</loc>
+         <loc>https://chriskempke.com/blog/runtime_navmesh/</loc>
          <lastmod>2026-02-23</lastmod>
     </url>
 </urlset>
